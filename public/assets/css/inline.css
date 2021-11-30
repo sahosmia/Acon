@@ -1,0 +1,67 @@
+.img_25{
+    width:25%;
+}
+.img_50{
+    width:50%;
+}
+.img_100{
+    width:100px;
+}
+.img_300{
+    width:300px;
+}
+
+.img_200{
+    width:200px;
+}
+.img_banner{
+    width: 850px;
+}
+.img_bg{
+    background:#fafafa;
+}
+.img_bg_deep{
+    background:#cfcfcf;
+}
+
+
+
+.seo-info{
+    background: #f1f1f1;
+}
+
+.h_280{
+    height: 280px !important;
+}
+
+.h_140{
+    height: 140px !important;
+}
+
+.h_70{
+    height: 70px !important;
+}
+
+.w_200{
+    width: 200px;
+}
+.w_50{
+    width: 50px;
+}
+
+
+
+/* modal  */
+
+.modal-backdrop.show {
+    opacity: 0;
+}
+.modal-backdrop {
+    position: relative;
+
+}
+
+.modal-dialog {
+    max-width: 800px;
+    margin: 1.75rem auto;
+}
