@@ -35,7 +35,7 @@ class ServiceController extends Controller
     public function insert(Request $req)
     {
         $heading = $req->heading;
-        $slug = $req->slug;
+        $slug = strtolower(str_replace(" ","-",$req->heading));
         $short_content = $req->short_content;
         $content = $req->content;
         $meta_title = $req->meta_title;
@@ -53,11 +53,7 @@ class ServiceController extends Controller
             'meta_description' => 'required',
         ]);
 
-        if ($slug == '') {
-            $slug = Str::slug($heading);
-        } else {
-            $slug = Str::slug($slug);
-        }
+
 
         $count = Service::where('slug', $slug)->count();
 
@@ -107,7 +103,6 @@ class ServiceController extends Controller
     {
         $id = $req->id;
         $heading = $req->heading;
-        $slug = $req->slug;
         $short_content = $req->short_content;
         $content = $req->content;
         $meta_title = $req->meta_title;
@@ -134,23 +129,10 @@ class ServiceController extends Controller
             ]);
         }
 
-        if ($slug == '') {
-            $slug = Str::slug($heading);
-        } else {
-            $slug = Str::slug($slug);
-        }
-
-
-        $count = Service::where('slug', $slug)->count();
-
-        if ($count > 1) {
-           $slug = $slug.'-1';
-        }
 
 
         Service::find($id)->update([
             "heading" => $heading,
-            "slug" => $slug,
             "short_content" => $short_content,
             "content" => $content,
             "meta_title" => $meta_title,

@@ -37,7 +37,7 @@ class PortfolioController extends Controller
    public function insert(Request $req)
    {
         $name = $req->name;
-        $slug = $req->slug;
+        $slug = $slug = strtolower(str_replace(" ","-",$req->name));
         $short_content = $req->short_content;
         $content = $req->content;
         $client_name = $req->client_name;
@@ -73,11 +73,7 @@ class PortfolioController extends Controller
             'banner' => 'required|file|image|mimes:jpeg,jpg,png',
         ]);
 
-        if ($slug == '') {
-            $slug = Str::slug($name);
-        } else {
-            $slug = Str::slug($slug);
-        }
+
 
         $count = Portfolio::where('slug', $slug)->count();
 
@@ -154,7 +150,6 @@ class PortfolioController extends Controller
    {
        $id = $req->id;
        $name = $req->name;
-       $slug = $req->slug;
        $short_content = $req->short_content;
        $content = $req->content;
        $client_name = $req->client_name;
@@ -190,18 +185,7 @@ class PortfolioController extends Controller
            'meta_description' => 'required',
        ]);
 
-       if ($slug == '') {
-            $slug = Str::slug($name);
-        } else {
-            $slug = Str::slug($slug);
-        }
 
-
-        $count = Portfolio::where('slug', $slug)->count();
-
-        if ($count > 1) {
-            $slug = $slug.'-1';
-        }
 
 
        if($photo){
@@ -218,7 +202,6 @@ class PortfolioController extends Controller
 
        Portfolio::find($id)->update([
            "name" => $name,
-           "slug" => $slug,
            "short_content" => $short_content,
            "content" => $content,
            "client_name" => $client_name,

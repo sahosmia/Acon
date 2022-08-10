@@ -25,78 +25,58 @@ use App\Http\Controllers\HomeController;
 
 
 
-Route::get('/', [FrontController::class, 'index'])
-    ->name('front');
+Route::get('/', [FrontController::class, 'index'])->name('front');
 
-Route::get('about', [FrontController::class, 'about'])
-    ->name('about');
+Route::get('about', [FrontController::class, 'about'])->name('about');
 
-Route::get('contact', [FrontController::class, 'contact'])
-    ->name('contact');
+Route::get('contact', [FrontController::class, 'contact'])->name('contact');
 
-Route::get('faq', [FrontController::class, 'faq'])
-    ->name('faq');
+Route::get('faq', [FrontController::class, 'faq'])->name('faq');
 
-Route::get('gallery', [FrontController::class, 'gallery'])
-    ->name('gallery');
+Route::get('gallery', [FrontController::class, 'gallery'])->name('gallery');
 
-Route::get('news', [FrontController::class, 'news'])
-    ->name('news');
+Route::get('news', [FrontController::class, 'news'])->name('news');
 Route::get('news/{slug}/{id}', [FrontController::class, 'news_view']);
 Route::get('category/view/{slug}/{id}', [FrontController::class, 'news_category_view']);
 
 
-Route::get('portfolio', [FrontController::class, 'portfolio'])
-    ->name('portfolio');
+Route::get('portfolio', [FrontController::class, 'portfolio'])->name('portfolio');
 
 Route::get('portfolio/{slug}/{id}', [FrontController::class, 'portfolio_view']);
 
-Route::get('service', [FrontController::class, 'service'])
-    ->name('service');
+Route::get('service', [FrontController::class, 'service'])->name('service');
 
 Route::get('service/{slug}/{id}', [FrontController::class, 'service_view']);
 
-Route::get('testimonial', [FrontController::class, 'testimonial'])
-    ->name('testimonial');
+Route::get('testimonial', [FrontController::class, 'testimonial'])->name('testimonial');
 
-Route::get('term', [FrontController::class, 'term'])
-    ->name('term');
+Route::get('term', [FrontController::class, 'term'])->name('term');
 
-Route::get('privacy', [FrontController::class, 'privacy'])
-    ->name('privacy');
+Route::get('privacy', [FrontController::class, 'privacy'])->name('privacy');
 
-Route::post('search', [FrontController::class, 'search'])
-    ->name('search');
+Route::post('search', [FrontController::class, 'search'])->name('search');
 
-Route::post('contact_send_email', [FrontController::class, 'contact_send_email'])
-    ->name('contact_send_email');
+Route::post('contact_send_email', [FrontController::class, 'contact_send_email'])->name('contact_send_email');
 
 
 
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-Route::view('admin/login', 'auth.login')
-        ->name('login_page');
+Route::view('admin/login', 'auth.login')->name('login_page');
 
 
-Route::get('/home', [HomeController::class, 'index'])
-        ->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // profile
-Route::get('admin/profile', [ProfileController::class, 'index'])
-        ->name('profile');
+Route::get('admin/profile', [ProfileController::class, 'index'])->name('profile');
 
-Route::post('admin/profile/update_information', [ProfileController::class, 'update_information'])
-        ->name('profile_update_information');
+Route::post('admin/profile/update_information', [ProfileController::class, 'update_information'])->name('profile_update_information');
 
-Route::post('admin/profile/update_photo', [ProfileController::class, 'update_photo'])
-        ->name('profile_update_photo');
+Route::post('admin/profile/update_photo', [ProfileController::class, 'update_photo'])->name('profile_update_photo');
 
-Route::post('admin/profile/update_password', [ProfileController::class, 'update_password'])
-        ->name('profile_update_password');
+Route::post('admin/profile/update_password', [ProfileController::class, 'update_password'])->name('profile_update_password');
 
-Route::post('admin/profile/profile_add', [ProfileController::class, 'profile_add'])
-        ->name('profile_add');
+Route::post('admin/profile/profile_add', [ProfileController::class, 'profile_add'])->name('profile_add');
 
 /* --------------------------------------- */
 /* comment  */
@@ -473,10 +453,12 @@ Route::post('admin/settings/privacy_banner_update', [SettingsController::class, 
 /* --------------------------------------- */
 /* slider  */
 /* --------------------------------------- */
+
+
 Route::get('admin/slider', [SliderController::class, 'index'])
         ->name('admin.slider');
 
-Route::get('admin/slider/add', [SliderController::class, 'slider_add'])
+Route::get('admin/slider/add', [SliderController::class, 'create'])
         ->name('admin.slider_add');
 
 Route::post('admin/slider/insert', [SliderController::class, 'insert'])

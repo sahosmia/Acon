@@ -32,7 +32,6 @@ active
                         <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-
                                 <th>SL</th>
                                 <th>Name</th>
                                 <th>Category</th>

@@ -28,10 +28,7 @@ active
                                     <th>SL</th>
                                     <th class="w_200">Photo</th>
                                     <th>Heading</th>
-                                    <th>Button1 Text</th>
-                                    <th>Button1 URL</th>
-                                    <th>Button2 Text</th>
-                                    <th>Button2 URL</th>
+
                                     <th class="w_200">Action</th>
                                 </tr>
                             </thead>
@@ -40,20 +37,14 @@ active
                                 @foreach ($sliders as $key => $item)
                                     <tr>
                                         <td>{{ $sliders->firstItem() + $key }}</td>
-
                                         <td><img class="img_100" src="{{ asset('uploads/slider') }}/{{ $item->photo }}" alt="{{ $item->heading }}" ></td>
                                         <td>{{ $item->heading }}</td>
-                                        <td>{{ $item->button1_text }}</td>
-                                        <td>{{ $item->button1_url }}</td>
-                                        <td>{{ $item->button2_text }}</td>
-                                        <td>{{ $item->button2_url }}</td>
                                         <td>
                                             <a href="{{ url('admin/slider/edit') }}/{{ $item->id }}" class="btn btn-primary btn-xs">Edit</a>
                                             <a href="{{ url('admin/slider/delete') }}/{{ $item->id }}" class="btn btn-danger btn-xs" >Delete</a>
                                         </td>
                                     </tr>
-
-                                    @endforeach
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

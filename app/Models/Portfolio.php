@@ -26,4 +26,9 @@ class Portfolio extends Model
         'meta_description',
     ];
 
+    public function category(){
+        return $this->hasOne(Category::class, 'id', 'blog_category_id');
+    }
+
+
 }

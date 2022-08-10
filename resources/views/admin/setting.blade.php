@@ -602,7 +602,7 @@ active
                 </form>
 
                 <h6 class="p-2 seo-info">Team</h6>
-                <form action="{{route('portfolio_update') }}" method="POST">
+                <form action="{{route('team_update') }}" method="POST">
                     @csrf
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>

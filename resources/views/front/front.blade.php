@@ -1,12 +1,7 @@
 @extends('front.front_layout')
 
-@section('meta_description')
-{{ $page->md_home }}
-@endsection
-
-@section('meta_title')
-{{ $page->mt_home }}
-@endsection
+@section('meta_description', $page->md_home)
+@section('meta_title', $page->mt_home)
 
 
 @section('content')

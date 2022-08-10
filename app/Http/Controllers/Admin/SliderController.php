@@ -15,7 +15,8 @@ class SliderController extends Controller
     {
         $this->middleware('auth');
     }
-     // view page
+
+
      public function index()
      {
          return view('admin.slider', [
@@ -24,7 +25,7 @@ class SliderController extends Controller
      }
 
      // insert page
-     public function slider_add()
+     public function create()
      {
          return view('admin.slider_add');
      }
