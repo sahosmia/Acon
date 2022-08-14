@@ -27,17 +27,15 @@ active
                         </div>
                     @endif
 
-                    @php
-                        $all_fild = ['photo', 'banner', 'name', 'short_content', 'content', 'client_name', 'client_company', 'start_date', 'end_date', 'website', 'cost', 'client_comment', 'category_id', 'meta_title', 'meta_description'];
-                    @endphp
-
-                    @foreach ($all_fild as $item)
-                        @error($item)
+                    @if ($errors->any())
                         <div class="alert alert-danger">
-                            <p>{{ $message }}</p>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
-                        @enderror
-                    @endforeach
+                    @endif
 
                     <form action="{{ route('admin.portfolio_insert') }}" method="POST" enctype="multipart/form-data">
                     @csrf

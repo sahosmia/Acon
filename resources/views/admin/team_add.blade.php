@@ -28,17 +28,15 @@ active
                         </div>
                     @endif
 
-                    @php
-                       $all_fild = ['name', 'photo', 'designation_id', 'facebook', 'twitter', 'linkedin', 'youtube', 'google_plus', 'instagram', 'flickr'];
-                    @endphp
-
-                    @foreach ($all_fild as $item)
-                        @error($item)
+                    @if ($errors->any())
                         <div class="alert alert-danger">
-                            <p>{{ $message }}</p>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
-                        @enderror
-                    @endforeach
+                    @endif
 
                     <form action="{{ route('admin.team_insert') }}" method="POST" enctype="multipart/form-data">
                     @csrf

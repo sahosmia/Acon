@@ -25,17 +25,15 @@ active
                         </div>
                     @endif
 
-                    @php
-                        $all_fild = ['photo', 'banner', 'heading', 'short_content', 'content', 'meta_title', 'meta_description'];
-                    @endphp
-
-                    @foreach ($all_fild as $item)
-                        @error($item)
+                    @if ($errors->any())
                         <div class="alert alert-danger">
-                            <p>{{ $message }}</p>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
-                        @enderror
-                    @endforeach
+                    @endif
 
                     <form action="{{ route('admin.service_insert') }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                     @csrf
@@ -48,7 +46,7 @@ active
                             </div>
                         </div>
 
-                    
+
 
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Short Content</label>
