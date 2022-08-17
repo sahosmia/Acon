@@ -8,7 +8,7 @@
 <div class="section-header">
     <h1>View Why Choose</h1>
     <div class="ml-auto">
-        <a href="{{ route('admin.why_choose_add') }}" class="btn btn-primary">Add New</a>
+        <a href="{{ route('admin.why-chooses.create') }}" class="btn btn-primary">Add New</a>
     </div>
 </div>
 
@@ -41,8 +41,12 @@
                                 <td>{{ $item->content }}</td>
 
                                 <td>
-                                    <a href="{{ url('admin/why_choose/edit') }}/{{ $item->id }}" class="btn btn-primary btn-xs">Edit</a>
-                                    <a href="{{ url('admin/why_choose/delete') }}/{{ $item->id }}" class="btn btn-danger btn-xs">Delete</a>
+                                    <a href="{{ route('admin.why-chooses.edit', $item->id) }}" class="btn btn-primary btn-xs">Edit</a>
+                                    <form action="{{ route('admin.why-chooses.destroy', $item->id) }}" method="post" class="d-inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-xs">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                             @empty

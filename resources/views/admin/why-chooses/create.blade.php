@@ -7,7 +7,7 @@
 <div class="section-header">
     <h1>Add Why Choose Us</h1>
     <div class="ml-auto">
-        <a href="{{ route('admin.why_choose') }}" class="btn btn-primary">View All</a>
+        <a href="{{ route('admin.why-chooses.index') }}" class="btn btn-primary">View All</a>
     </div>
 </div>
 
@@ -34,7 +34,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('admin.why_choose_insert') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.why-chooses.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                         <div class="form-group row mb-4">

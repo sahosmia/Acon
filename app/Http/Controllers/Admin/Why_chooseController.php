@@ -10,26 +10,20 @@ use Image;
 
 class Why_chooseController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    // view page
+
     public function index()
     {
-        return view('admin.why_choose', [
+        return view('admin.why-chooses.index', [
             'why_chooses' => Why_choose::paginate(10),
         ]);
     }
 
-    // insert page
-    public function why_choose_add()
+    public function create()
     {
-        return view('admin.why_choose_add');
+        return view('admin.why-chooses.create');
     }
 
-    // insert
-    public function insert(Request $req)
+    public function store(Request $req)
     {
 
         $heading = $req->heading;
@@ -62,18 +56,16 @@ class Why_chooseController extends Controller
     }
 
 
-    // edit page
-    public function edit_page($id)
+    public function edit($id)
     {
-        return view('admin.why_choose_edit', [
+        return view('admin.why-chooses.edit', [
             'why_choose' => Why_choose::find($id),
         ]);
     }
 
-    // edit
-    public function edit(Request $req)
+    public function update(Request $req, $id)
     {
-        $id = $req->id;
+
         $heading = $req->heading;
         $content = $req->content;
         $photo = $req->file('photo');
@@ -111,8 +103,7 @@ class Why_chooseController extends Controller
         return back()->with('success', 'You are success to update why choose item');
     }
 
-    // p_delete single
-    public function delete($id)
+    public function destroy($id)
     {
         $photo = Why_choose::find($id)->photo;
         unlink('uploads/why_choose/' . $photo);

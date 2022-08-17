@@ -23,41 +23,25 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\HomeController;
 
-
-
-Route::get('/', [FrontController::class, 'index'])->name('front');
-
-Route::get('about', [FrontController::class, 'about'])->name('about');
-
-Route::get('contact', [FrontController::class, 'contact'])->name('contact');
-
-Route::get('faq', [FrontController::class, 'faq'])->name('faq');
-
-Route::get('gallery', [FrontController::class, 'gallery'])->name('gallery');
-
-Route::get('news', [FrontController::class, 'news'])->name('news');
-Route::get('news/{slug}/{id}', [FrontController::class, 'news_view']);
-Route::get('category/view/{slug}/{id}', [FrontController::class, 'news_category_view']);
-
-
-Route::get('portfolio', [FrontController::class, 'portfolio'])->name('portfolio');
-
-Route::get('portfolio/{slug}/{id}', [FrontController::class, 'portfolio_view']);
-
-Route::get('service', [FrontController::class, 'service'])->name('service');
-
-Route::get('service/{slug}/{id}', [FrontController::class, 'service_view']);
-
-Route::get('testimonial', [FrontController::class, 'testimonial'])->name('testimonial');
-
-Route::get('term', [FrontController::class, 'term'])->name('term');
-
-Route::get('privacy', [FrontController::class, 'privacy'])->name('privacy');
-
-Route::post('search', [FrontController::class, 'search'])->name('search');
-
-Route::post('contact_send_email', [FrontController::class, 'contact_send_email'])->name('contact_send_email');
-
+Route::controller(FrontController::class)->group(function(){
+    Route::get('/', 'index')->name('front');
+    Route::get('about', 'about')->name('about');
+    Route::get('contact', 'contact')->name('contact');
+    Route::get('faq', 'faq')->name('faq');
+    Route::get('gallery', 'gallery')->name('gallery');
+    Route::get('news', 'news')->name('news');
+    Route::get('news/{slug}/{id}', 'news_view');
+    Route::get('category/view/{slug}/{id}', 'news_category_view');
+    Route::get('portfolio', 'portfolio')->name('portfolio');
+    Route::get('portfolio/{slug}/{id}', 'portfolio_view');
+    Route::get('service', 'service')->name('service');
+    Route::get('service/{slug}/{id}', 'service_view');
+    Route::get('testimonial', 'testimonial')->name('testimonial');
+    Route::get('term', 'term')->name('term');
+    Route::get('privacy', 'privacy')->name('privacy');
+    Route::post('search', 'search')->name('search');
+    Route::post('contact_send_email', 'contact_send_email')->name('contact_send_email');
+});
 
 
 Auth::routes();
@@ -192,24 +176,6 @@ Route::post('admin/news_category/edit', [News_categoryController::class, 'edit']
 Route::get('admin/news_category/delete/{id}', [News_categoryController::class, 'delete']);
 
 
-/* --------------------------------------- */
-/* partner  */
-/* --------------------------------------- */
-Route::get('admin/partner', [PartnerController::class, 'index'])
-        ->name('admin.partner');
-
-Route::get('admin/parnter/add', [PartnerController::class, 'partner_add'])
-        ->name('admin.partner_add');
-
-Route::post('admin/partner/insert', [PartnerController::class, 'insert'])
-        ->name('admin.partner_insert');
-
-Route::get('admin/partner/edit/{id}', [PartnerController::class, 'edit_page']);
-
-Route::post('admin/partner/edit', [PartnerController::class, 'edit'])
-        ->name('admin.partner_edit');
-
-Route::get('admin/partner/delete/{id}', [PartnerController::class, 'delete']);
 
 
 // page
@@ -329,51 +295,55 @@ Route::get('admin/service/delete/{id}', [ServiceController::class, 'delete']);
 
 Route::controller(SettingsController::class)->prefix('admin/settings/')->group(function(){
 
-Route::get('/', 'index')->name('admin.settings');
-Route::post('logo_update', 'logo_update')->name('logo_update');
-Route::post('admin_logo_update', 'admin_logo_update')->name('admin_logo_update');
-Route::post('favicon_update', 'favicon_update')->name('favicon_update');
-Route::post('login_bg_update', 'login_bg_update')->name('login_bg_update');
-Route::post('generel_update', 'generel_update')->name('generel_update');
-Route::post('address_icon_update', 'address_icon_update')->name('address_icon_update');
-Route::post('phone_icon_update', 'phone_icon_update')->name('phone_icon_update');
-Route::post('working_hour_icon_update', 'working_hour_icon_update')->name('working_hour_icon_update');
-Route::post('email_update', 'email_update')->name('email_update');
-Route::post('sidebar_footer_update', 'sidebar_footer_update')->name('sidebar_footer_update');
-Route::post('why_choose_update', 'why_choose_update')->name('why_choose_update');
-Route::post('why_choose_main_photo_update', 'why_choose_main_photo_update')->name('why_choose_main_photo_update');
-Route::post('why_choose_item_photo_update', 'why_choose_item_photo_update')->name('why_choose_item_photo_update');
-Route::post('service_update', 'service_update')->name('service_update');
-Route::post('portfolio_update', 'portfolio_update')->name('portfolio_update');
-Route::post('team_update', 'team_update')->name('team_update');
-Route::post('testimonial_update', 'testimonial_update')->name('testimonial_update');
-Route::post('testimonial_main_photo_update', 'testimonial_main_photo_update')->name('testimonial_main_photo_update');
-Route::post('faq_update', 'faq_update')->name('faq_update');
-Route::post('faq_main_photo_update', 'faq_main_photo_update')->name('faq_main_photo_update');
-Route::post('gallery_update', 'gallery_update')->name('gallery_update');
-Route::post('recent_post_update', 'recent_post_update')->name('recent_post_update');
-Route::post('partner_update', 'partner_update')->name('partner_update');
-Route::post('counter_bg_update', 'counter_bg_update')->name('counter_bg_update');
-Route::post('counter_update', 'counter_update')->name('counter_update');
-Route::post('total_recent_post_update', 'total_recent_post_update')->name('total_recent_post_update');
-Route::post('color_update', 'color_update')->name('color_update');
-Route::post('other_update', 'other_update')->name('other_update');
-Route::post('about_banner_update', 'about_banner_update')->name('about_banner_update');
-Route::post('faq_banner_update', 'faq_banner_update')->name('faq_banner_update');
-Route::post('gallery_banner_update', 'gallery_banner_update')->name('gallery_banner_update');
-Route::post('service_banner_update', 'service_banner_update')->name('service_banner_update');
-Route::post('portfolio_banner_update', 'portfolio_banner_update')->name('portfolio_banner_update');
-Route::post('testimonial_banner_update', 'testimonial_banner_update')->name('testimonial_banner_update');
-Route::post('news_banner_update', 'news_banner_update')->name('news_banner_update');
-Route::post('contact_banner_update', 'contact_banner_update')->name('contact_banner_update');
-Route::post('search_banner_update', 'search_banner_update')->name('search_banner_update');
-Route::post('category_banner_update', 'category_banner_update')->name('category_banner_update');
-Route::post('terms_banner_update', 'terms_banner_update')->name('terms_banner_update');
-Route::post('privacy_banner_update', 'privacy_banner_update')->name('privacy_banner_update');
+    Route::get('/', 'index')->name('admin.settings');
+    Route::post('logo_update', 'logo_update')->name('logo_update');
+    Route::post('admin_logo_update', 'admin_logo_update')->name('admin_logo_update');
+    Route::post('favicon_update', 'favicon_update')->name('favicon_update');
+    Route::post('login_bg_update', 'login_bg_update')->name('login_bg_update');
+    Route::post('generel_update', 'generel_update')->name('generel_update');
+    Route::post('address_icon_update', 'address_icon_update')->name('address_icon_update');
+    Route::post('phone_icon_update', 'phone_icon_update')->name('phone_icon_update');
+    Route::post('working_hour_icon_update', 'working_hour_icon_update')->name('working_hour_icon_update');
+    Route::post('email_update', 'email_update')->name('email_update');
+    Route::post('sidebar_footer_update', 'sidebar_footer_update')->name('sidebar_footer_update');
+    Route::post('why_choose_update', 'why_choose_update')->name('why_choose_update');
+    Route::post('why_choose_main_photo_update', 'why_choose_main_photo_update')->name('why_choose_main_photo_update');
+    Route::post('why_choose_item_photo_update', 'why_choose_item_photo_update')->name('why_choose_item_photo_update');
+    Route::post('service_update', 'service_update')->name('service_update');
+    Route::post('portfolio_update', 'portfolio_update')->name('portfolio_update');
+    Route::post('team_update', 'team_update')->name('team_update');
+    Route::post('testimonial_update', 'testimonial_update')->name('testimonial_update');
+    Route::post('testimonial_main_photo_update', 'testimonial_main_photo_update')->name('testimonial_main_photo_update');
+    Route::post('faq_update', 'faq_update')->name('faq_update');
+    Route::post('faq_main_photo_update', 'faq_main_photo_update')->name('faq_main_photo_update');
+    Route::post('gallery_update', 'gallery_update')->name('gallery_update');
+    Route::post('recent_post_update', 'recent_post_update')->name('recent_post_update');
+    Route::post('partner_update', 'partner_update')->name('partner_update');
+    Route::post('counter_bg_update', 'counter_bg_update')->name('counter_bg_update');
+    Route::post('counter_update', 'counter_update')->name('counter_update');
+    Route::post('total_recent_post_update', 'total_recent_post_update')->name('total_recent_post_update');
+    Route::post('color_update', 'color_update')->name('color_update');
+    Route::post('other_update', 'other_update')->name('other_update');
+    Route::post('about_banner_update', 'about_banner_update')->name('about_banner_update');
+    Route::post('faq_banner_update', 'faq_banner_update')->name('faq_banner_update');
+    Route::post('gallery_banner_update', 'gallery_banner_update')->name('gallery_banner_update');
+    Route::post('service_banner_update', 'service_banner_update')->name('service_banner_update');
+    Route::post('portfolio_banner_update', 'portfolio_banner_update')->name('portfolio_banner_update');
+    Route::post('testimonial_banner_update', 'testimonial_banner_update')->name('testimonial_banner_update');
+    Route::post('news_banner_update', 'news_banner_update')->name('news_banner_update');
+    Route::post('contact_banner_update', 'contact_banner_update')->name('contact_banner_update');
+    Route::post('search_banner_update', 'search_banner_update')->name('search_banner_update');
+    Route::post('category_banner_update', 'category_banner_update')->name('category_banner_update');
+    Route::post('terms_banner_update', 'terms_banner_update')->name('terms_banner_update');
+    Route::post('privacy_banner_update', 'privacy_banner_update')->name('privacy_banner_update');
 
 });
 
-Route::prefix('admin')->name('admin.')->group(function() {
+
+
+
+
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function() {
 
 
 
@@ -396,8 +366,20 @@ Route::prefix('admin')->name('admin.')->group(function() {
 
 
 
-    /* --------------------- team  --------------------- */
 
+
+    /* --------------------partner ---------------------- */
+    Route::controller(PartnerController::class)->prefix('partner')->group(function(){
+        Route::get('/', 'index')->name('partner');
+        Route::get('/add', 'partner_add')->name('partner_add');
+        Route::post('/insert', 'insert')->name('partner_insert');
+        Route::get('/edit/{id}', 'edit_page');
+        Route::post('/edit', 'edit')->name('partner_edit');
+        Route::get('/delete/{id}', 'delete');
+    });
+
+
+    /* --------------------- team  --------------------- */
     Route::controller(TeamController::class)->prefix('team')->group(function(){
         Route::get('/', 'index')->name('team');
         Route::get('/add', 'team_add')->name('team_add');
@@ -409,7 +391,6 @@ Route::prefix('admin')->name('admin.')->group(function() {
 
 
     /* -------------------testimonial------------------ */
-
     Route::controller(TestimonialController::class)->prefix('testimonial')->group(function(){
         Route::get('/', 'index')->name('testimonial');
         Route::get('/add', 'testimonial_add')->name('testimonial_add');
@@ -419,18 +400,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::get('/delete/{id}', 'delete');
     });
 
-
-    /*-------------------- why_choose ------------------- */
-
-    Route::controller(Why_chooseController::class)->prefix('why_choose')->group(function(){
-        Route::get('/', 'index')->name('why_choose');
-        Route::get('/add', 'why_choose_add')->name('why_choose_add');
-        Route::post('/insert','insert')->name('why_choose_insert');
-        Route::get('/edit/{id}', 'edit_page');
-        Route::post('/edit', 'edit')->name('why_choose_edit');
-        Route::get('/delete/{id}', 'delete');
-    });
-
+    Route::resource('why-chooses', Why_chooseController::class);
 });
 
 

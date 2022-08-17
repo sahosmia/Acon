@@ -7,7 +7,7 @@
 <div class="section-header">
     <h1>Edit Why Choose Us</h1>
     <div class="ml-auto">
-        <a href="{{ route('admin.why_choose') }}" class="btn btn-primary">View All</a>
+        <a href="{{ route('admin.why-chooses.index') }}" class="btn btn-primary">View All</a>
     </div>
 </div>
 
@@ -34,9 +34,10 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('admin.why_choose_edit') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.why-chooses.update', $why_choose->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" value="{{ $why_choose->id }}" name="id">
+                    @method('PUT')
+
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Existing Photo</label>
                             <div class="col-sm-12 col-md-7">

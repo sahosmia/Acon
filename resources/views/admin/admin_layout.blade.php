@@ -89,7 +89,7 @@
               </li>
               <li class="@yield('testimonial')"><a class="nav-link" href="{{ route('admin.testimonial') }}"><i class="fa fa-user-plus"></i> <span>Testimonial</span></a></li>
               <li class="@yield('partner')"><a class="nav-link" href="{{ route('admin.partner') }}"><i class="fas fa-handshake"></i> <span>Partner</span></a></li>
-              <li class="@yield('why_choose')"><a class="nav-link" href="{{ route('admin.why_choose') }}"><i class="fa fa-bolt"></i> <span>Why Choose Us</span></a></li>
+              <li class="@yield('why_choose')"><a class="nav-link" href="{{ route('admin.why-chooses.index') }}"><i class="fa fa-bolt"></i> <span>Why Choose Us</span></a></li>
               <li class="@yield('page')"><a class="nav-link" href="{{ route('admin.page') }}"><i class="fas fa-file-alt"></i> <span>Page</span></a></li>
               <li class="nav-item dropdown @yield('news-drop')">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fa fa-newspaper"></i> <span>News Section</span></a>
