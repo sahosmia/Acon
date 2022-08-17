@@ -1,12 +1,9 @@
 @extends('admin.admin_layout')
 
-@section('portfolio-drop')
-active
-@endsection
+@section('title', 'Portfolio Category')
+@section('portfolio_category', 'active')
+@section('portfolio-drop', 'active')
 
-@section('portfolio_category')
-active
-@endsection
 
 
 @section('content')
@@ -34,7 +31,7 @@ active
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($portfolio_categorys as $key => $item)
+                                @forelse($portfolio_categorys as $key => $item)
                                     <tr>
                                         <td class="w_50">{{ $portfolio_categorys->firstItem() + $key }}</td>
                                         <td>{{ $item->name }}</td>
@@ -44,7 +41,10 @@ active
                                             <a href="{{ url('admin/portfolio_category/delete') }}/{{ $item->id }}" class="btn btn-danger btn-xs">Delete</a>
                                         </td>
                                     </tr>
-                                    @endforeach
+                                @empty
+                                    no data to show
+                                @endforelse
+
                             </tbody>
                         </table>
                     </div>

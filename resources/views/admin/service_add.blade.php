@@ -1,8 +1,8 @@
 @extends('admin.admin_layout')
 
-@section('service')
-active
-@endsection
+@section('title', 'Service | Create')
+@section('service', 'active')
+
 
 @section('content')
 <div class="section-header">

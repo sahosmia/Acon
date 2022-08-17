@@ -1,9 +1,8 @@
 @extends('admin.admin_layout')
 
-@section('news')
-active
-@endsection
-
+@section('title', 'News Category')
+@section('news_category', 'active')
+@section('news-drop', 'active')
 
 @section('content')
 <div class="section-header">
@@ -30,7 +29,7 @@ active
                     </thead>
                     <tbody>
 
-                        @foreach ($news_categorys as $key => $item)
+                        @forelse ($news_categorys as $key => $item)
                             <tr>
                                 <td>{{ $news_categorys->firstItem() + $key }}</td>
                                 <td>{{ $item->name }}</td>
@@ -39,8 +38,9 @@ active
                                     <a href="{{ url('admin/news_category/delete') }}/{{ $item->id }}" class="btn btn-danger btn-xs">Delete</a>
                                 </td>
                             </tr>
-
-                        @endforeach
+                        @empty
+                        No data to show
+                        @endforelse
                     </tbody>
                 </table>
             </div>

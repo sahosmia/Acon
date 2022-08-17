@@ -1,12 +1,9 @@
 @extends('admin.admin_layout')
 
-@section('team-drop')
-active
-@endsection
+@section('title', 'Designation | Create')
+@section('designation', 'active')
+@section('team-drop', 'active')
 
-@section('designation')
-active
-@endsection
 
 @section('content')
 <div class="section-header">

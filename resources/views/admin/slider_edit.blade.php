@@ -1,8 +1,8 @@
 @extends('admin.admin_layout')
 
-@section('slider')
-active
-@endsection
+@section('title', 'Slider | Update')
+@section('slider', 'active')
+
 
 @section('content')
 <div class="section-header">
@@ -111,17 +111,15 @@ active
                         </div>
                     @endif
 
-                    @php
-                        $all_fild = ['photo', 'heading', 'content', 'button1_text', 'button1_url', 'button2_text', 'button2_url'];
-                    @endphp
-
-                    @foreach ($all_fild as $item)
-                        @error($item)
+                    @if ($errors->any())
                         <div class="alert alert-danger">
-                            <p>{{ $message }}</p>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
-                        @enderror
-                    @endforeach
+                    @endif
 
                     <form action="{{ route('admin.slider_edit') }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                     @csrf

@@ -1,8 +1,7 @@
 @extends('admin.admin_layout')
 
-@section('photo')
-active
-@endsection
+@section('title', 'Photo | Create')
+@section('photo', 'active')
 
 @section('content')
 <div class="section-header">
@@ -11,9 +10,6 @@ active
         <a href="{{ route('admin.photo') }}" class="btn btn-primary">View All</a>
     </div>
 </div>
-
-
-
 
 <div class="section-body">
     <div class="row">

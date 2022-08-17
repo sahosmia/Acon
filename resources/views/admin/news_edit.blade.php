@@ -1,12 +1,8 @@
 @extends('admin.admin_layout')
 
-@section('news-drop')
-active
-@endsection
-
-@section('news')
-active
-@endsection
+@section('title', 'News | Update')
+@section('news', 'active')
+@section('news-drop', 'active')
 
 @section('content')
 <div class="section-header">
@@ -28,17 +24,15 @@ active
                         </div>
                     @endif
 
-                    @php
-                        $all_fild = ['photo', 'banner', 'title', 'short_content', 'content', 'comment', 'category_id', 'meta_title', 'meta_description'];
-                    @endphp
-
-                    @foreach ($all_fild as $item)
-                        @error($item)
+                    @if ($errors->any())
                         <div class="alert alert-danger">
-                            <p>{{ $message }}</p>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
-                        @enderror
-                    @endforeach
+                    @endif
 
                     <form action="{{ route('admin.news_edit') }}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -47,13 +41,6 @@ active
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                             <div class="col-sm-12 col-md-7">
                                 <input type="text" class="form-control" name="title" value="{{ $news->title }}">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-4">
-                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Slug</label>
-                            <div class="col-sm-12 col-md-7">
-                                <input type="text" class="form-control" name="slug" value="{{ $news->slug }}">
                             </div>
                         </div>
 

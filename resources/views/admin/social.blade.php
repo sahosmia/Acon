@@ -1,9 +1,7 @@
 @extends('admin.admin_layout')
 
-@section('social')
-active
-@endsection
-
+@section('title', 'Social')
+@section('social', 'active')
 
 @section('content')
 
@@ -25,17 +23,15 @@ active
                         </div>
                     @endif
 
-                    @php
-                        $all_fild = ['Facebook', 'Twitter', 'Linkedin', 'Googleplus', 'Pinterest', 'Youtube', 'Instagram', 'Tumblr', 'Flickr', 'Reddit', 'Snapchat', 'Whatsapp', 'Quora', 'Stumbleupon', 'Delicious', 'Digg'];
-                    @endphp
-
-                    @foreach ($all_fild as $item)
-                        @error($item)
+                    @if ($errors->any())
                         <div class="alert alert-danger">
-                            <p>{{ $message }}</p>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
-                        @enderror
-                    @endforeach
+                    @endif
 
                     <form action="{{ route('admin.social_update') }}" method="POST">
                     @csrf

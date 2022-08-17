@@ -34,18 +34,17 @@ class NewsController extends Controller
   }
 
   // insert
-  public function insert(Request $req){
-        $title = $req->title;
-        $slug = $req->slug;
-        $short_content = $req->short_content;
-        $content = $req->content;
-        $comment = $req->comment;
-        $category_id = $req->category_id;
-        $meta_title = $req->meta_title;
-        $meta_description = $req->meta_description;
+  public function insert(Request $request){
+        $title = $request->title;
+        $short_content = $request->short_content;
+        $content = $request->content;
+        $comment = $request->comment;
+        $category_id = $request->category_id;
+        $meta_title = $request->meta_title;
+        $meta_description = $request->meta_description;
         $created_at = Carbon::now();
 
-        $req->validate([
+        $request->validate([
             'title' => 'required',
             'short_content' => 'required',
             'content' => 'required',
@@ -56,14 +55,9 @@ class NewsController extends Controller
             'photo' => 'required|file|image|mimes:jpeg,jpg,png',
             'banner' => 'required|file|image|mimes:jpeg,jpg,png',
         ]);
-        if ($slug == '') {
-            $slug = Str::slug($title);
-        } else {
-            $slug = Str::slug($slug);
-        }
 
+        $slug = strtolower(str_replace(" ","-",$request->title));
         $count = News::where('slug', $slug)->count();
-
         if ($count != 0) {
             $slug = $slug.'-1';
         }
@@ -79,15 +73,15 @@ class NewsController extends Controller
           "meta_title" => $meta_title,
           "meta_description" => $meta_description,
           "created_at" => $created_at,
-          "added_by" => Auth::id(),
+          "added_by" => auth()->id(),
       ]);
 
-      $photo = $req->file('photo');
+      $photo = $request->file('photo');
       $photo_extention = $photo->getClientOriginalExtension();
       $photo_name = "news_" .$id ."." . $photo_extention;
       Image::make($photo)->save(base_path('public/uploads/news/' . $photo_name));
 
-      $news_photo = $req->file('banner');
+      $news_photo = $request->file('banner');
       $news_photo_extention = $news_photo->getClientOriginalExtension();
       $news_photo_name = "news_banner_" .$id ."." . $news_photo_extention;
       Image::make($news_photo)->save(base_path('public/uploads/banner/' . $news_photo_name));
@@ -113,7 +107,6 @@ class NewsController extends Controller
   public function edit(Request $req)
   {
       $id = $req->id;
-      $slug = $req->slug;
       $title = $req->title;
       $short_content = $req->short_content;
       $content = $req->content;
@@ -134,18 +127,9 @@ class NewsController extends Controller
           'meta_description' => 'required',
       ]);
 
-        if ($slug == '') {
-           $slug = Str::slug($title);
-        } else {
-            $slug = Str::slug($slug);
-        }
 
 
-        $count = News::where('slug', $slug)->count();
 
-        if ($count > 1) {
-            $slug = $slug.'-1';
-        }
 
 
       if($photo){
@@ -161,7 +145,6 @@ class NewsController extends Controller
 
       News::find($id)->update([
           "title" => $title,
-          "slug" => $slug,
           "short_content" => $short_content,
           "content" => $content,
           "comment" => $comment,

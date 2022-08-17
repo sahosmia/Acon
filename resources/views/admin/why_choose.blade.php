@@ -1,8 +1,8 @@
 @extends('admin.admin_layout')
 
-@section('why_choose')
-active
-@endsection
+@section('title', 'Why Choose')
+@section('why_choose', 'active')
+
 
 @section('content')
 <div class="section-header">
@@ -32,7 +32,7 @@ active
                     </thead>
                     <tbody>
 
-                        @foreach ($why_chooses as $key => $item)
+                        @forelse ($why_chooses as $key => $item)
                             <tr>
                                 <td class="w_50">{{ $why_chooses->firstItem() + $key }}</td>
 
@@ -45,7 +45,9 @@ active
                                     <a href="{{ url('admin/why_choose/delete') }}/{{ $item->id }}" class="btn btn-danger btn-xs">Delete</a>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                            NO data to show
+                        @endforelse
                     </tbody>
                     </table>
                 </div>

@@ -1,13 +1,9 @@
 @extends('admin.admin_layout')
 
-@section('comment')
-active
-@endsection
-
+@section('title', 'Comment | Create')
+@section('comment', 'active')
 
 @section('content')
-
-
 <div class="section-header">
     <h1>Edit Comment</h1>
 </div>
@@ -25,17 +21,15 @@ active
                         </div>
                     @endif
 
-                    @php
-                        $all_fild = ['code_body'];
-                    @endphp
-
-                    @foreach ($all_fild as $item)
-                        @error($item)
+                    @if ($errors->any())
                         <div class="alert alert-danger">
-                            <p>{{ $message }}</p>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
-                        @enderror
-                    @endforeach
+                    @endif
 
                     <p>Go to the facebook developer section ( <a href="https://developers.facebook.com/docs/plugins/comments/">https://developers.facebook.com/docs/plugins/comments/</a> ) to get your comment codes.</p>
 

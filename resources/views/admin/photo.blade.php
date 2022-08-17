@@ -1,8 +1,8 @@
 @extends('admin.admin_layout')
 
-@section('photo')
-active
-@endsection
+@section('title', 'Photo')
+@section('photo', 'active')
+
 
 
 @section('content')
@@ -31,7 +31,7 @@ active
                             </thead>
                             <tbody>
 
-                                @foreach ($photos as $key => $item)
+                                @forelse ($photos as $key => $item)
                                     <tr>
                                         <td class="w_50">{{ $photos->firstItem() + $key }}</td>
                                         <td>{{ $item->caption }}</td>
@@ -44,7 +44,9 @@ active
                                             <a href="{{ url('admin/photo/delete') }}/{{ $item->id }}" class="btn btn-danger btn-xs">Delete</a>
                                         </td>
                                     </tr>
-                                    @endforeach
+                                @empty
+                                no data to show
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

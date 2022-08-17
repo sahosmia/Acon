@@ -1,9 +1,7 @@
 @extends('admin.admin_layout')
 
-@section('slider')
-active
-@endsection
-
+@section('title', 'Slider')
+@section('slider', 'active')
 
 @section('content')
 
@@ -34,7 +32,7 @@ active
                             </thead>
                             <tbody>
 
-                                @foreach ($sliders as $key => $item)
+                                @forelse ($sliders as $key => $item)
                                     <tr>
                                         <td>{{ $sliders->firstItem() + $key }}</td>
                                         <td><img class="img_100" src="{{ asset('uploads/slider') }}/{{ $item->photo }}" alt="{{ $item->heading }}" ></td>
@@ -44,7 +42,9 @@ active
                                             <a href="{{ url('admin/slider/delete') }}/{{ $item->id }}" class="btn btn-danger btn-xs" >Delete</a>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                No data to show
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

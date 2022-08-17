@@ -1,13 +1,9 @@
 @extends('admin.admin_layout')
 
-@section('service')
-active
-@endsection
-
+@section('title', 'Service')
+@section('service', 'active')
 
 @section('content')
-
-
 <div class="section-header">
     <h1>View Service</h1>
     <div class="ml-auto">
@@ -37,7 +33,7 @@ active
               </thead>
               <tbody>
 
-                  @foreach ($services as $key => $item)
+                  @forelse ($services as $key => $item)
                       <tr>
                           <td class="w_50">{{ $services->firstItem() + $key }}</td>
 
@@ -50,7 +46,9 @@ active
                               <a href="{{ url('admin/service/delete') }}/{{ $item->id }}" class="btn btn-danger btn-xs">Delete</a>
                           </td>
                       </tr>
-                    @endforeach
+                      @empty
+                      NO data to show
+                    @endforelse
               </tbody>
             </table>
           </div>

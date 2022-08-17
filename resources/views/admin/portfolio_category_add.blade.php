@@ -1,12 +1,8 @@
 @extends('admin.admin_layout')
 
-@section('portfolio-drop')
-active
-@endsection
-
-@section('portfolio_category')
-active
-@endsection
+@section('title', 'Portfolio Category | Create')
+@section('portfolio_category', 'active')
+@section('portfolio-drop', 'active')
 
 @section('content')
 <div class="section-header">

@@ -1,8 +1,7 @@
 @extends('admin.admin_layout')
 
-@section('partner')
-active
-@endsection
+@section('title', 'Partner')
+@section('partner', 'active')
 
 
 @section('content')
@@ -33,7 +32,7 @@ active
                         </thead>
                         <tbody>
 
-                            @foreach ($partners as $key => $item)
+                            @forelse ($partners as $key => $item)
                                 <tr>
                                     <td class="w_50">{{ $partners->firstItem() + $key }}</td>
 
@@ -45,7 +44,9 @@ active
                                         <a href="{{ url('admin/partner/delete') }}/{{ $item->id }}" class="btn btn-danger btn-xs">Delete</a>
                                     </td>
                                 </tr>
-                                @endforeach
+                            @empty
+                            No data to show
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

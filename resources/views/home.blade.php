@@ -1,9 +1,7 @@
 @extends('admin.admin_layout')
 
-@section('dashboard')
-active
-@endsection
-
+@section('title', 'Dashboard')
+@section('dashboard', 'active')
 
 @section('content')
 

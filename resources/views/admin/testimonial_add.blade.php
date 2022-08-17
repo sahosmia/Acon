@@ -1,8 +1,8 @@
 @extends('admin.admin_layout')
 
-@section('testimonial')
-active
-@endsection
+@section('title', 'Testimonial | Create')
+@section('testimonial', 'active')
+
 
 @section('content')
 <div class="section-header">

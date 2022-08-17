@@ -1,9 +1,7 @@
 @extends('admin.admin_layout')
 
-@section('language')
-active
-@endsection
-
+@section('title', 'Language')
+@section('language', 'active')
 
 @section('content')
 <div class="section-header">

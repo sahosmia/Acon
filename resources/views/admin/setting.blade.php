@@ -1,8 +1,7 @@
 @extends('admin.admin_layout')
 
-@section('settings')
-active
-@endsection
+@section('title', 'Settings')
+@section('settings', 'active')
 
 
 @section('content')
@@ -18,17 +17,15 @@ active
                 </div>
             @endif
 
-            @php
-                $all_fild = ['why_choose_main_photo', 'why_choose_item_photo', 'photo', 'photo_logo', 'photo_logo_admin', 'photo_favicon', 'login_bg', 'footer_copyright', 'footer_address', 'footer_phone', 'footer_working_hour', 'footer_about', 'top_bar_email', 'top_bar_phone', 'contact_map_iframe', 'footer_address_icon', 'footer_phone_icon', 'footer_working_hour_icon', 'send_email_from', 'receive_email_to', 'smtp_active', 'smtp_ssl', 'smtp_host', 'smtp_port', 'smtp_username', 'smtp_password', 'total_recent_post', 'total_popular_post', 'why_choose_title', 'why_choose_item_bg', 'why_choose_main_photo', 'why_choose_subtitle', 'why_choose_status', 'service_title', 'service_subtitle', 'service_status', 'portfolio_title', 'portfolio_subtitle', 'portfolio_status', 'team_title', 'team_subtitle', 'team_status', 'testimonial_title', 'testimonial_subtitle', 'testimonial_status', 'testimonial_main_photo', 'faq_title', 'faq_subtitle', 'faq_status', 'faq_main_photo', 'gallery_title', 'gallery_subtitle', 'gallery_status', 'recent_post_title', 'recent_post_subtitle', 'recent_post_status', 'partner_title', 'partner_subtitle', 'partner_status', 'counter_bg', 'counter1_text', 'counter1_value', 'counter2_text', 'counter2_value', 'counter3_text', 'counter3_value', 'counter4_text', 'counter4_value', 'counter_status', 'total_recent_post_home', 'theme_color_1', 'theme_color_2', 'tawk_live_chat_status', 'tawk_live_chat_code', 'preloader_status'];
-            @endphp
-
-            @foreach ($all_fild as $item)
-                @error($item)
+            @if ($errors->any())
                 <div class="alert alert-danger">
-                    <p>{{ $message }}</p>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
-                @enderror
-            @endforeach
+            @endif
 		</div>
 	</div>
 

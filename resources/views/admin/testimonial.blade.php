@@ -1,8 +1,7 @@
 @extends('admin.admin_layout')
 
-@section('testimonial')
-active
-@endsection
+@section('title', 'Testimonial')
+@section('testimonial', 'active')
 
 @section('content')
 
@@ -36,7 +35,7 @@ active
                     </thead>
                     <tbody>
 
-                        @foreach ($testimonials as $key => $item)
+                        @forelse ($testimonials as $key => $item)
                             <tr>
                                 <td class="w_50">{{ $testimonials->firstItem() + $key }}</td>
 
@@ -51,7 +50,9 @@ active
                                     <a href="{{ url('admin/testimonial/delete') }}/{{ $item->id }}" class="btn btn-danger btn-xs">Delete</a>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                            No data to show
+                            @endforelse
                     </tbody>
                     </table>
                 </div>

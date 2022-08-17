@@ -9,7 +9,6 @@ use App\Models\Portfolio_photo;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Image;
-use Illuminate\Support\Str;
 
 class PortfolioController extends Controller
 {
@@ -21,7 +20,7 @@ class PortfolioController extends Controller
    public function index()
    {
        return view('admin.portfolio', [
-           'portfolios' => Portfolio::paginate(10),
+           'portfolios' => Portfolio::with("protfolioCategory:id,name")->paginate(10),
        ]);
    }
 

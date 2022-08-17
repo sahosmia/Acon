@@ -1,9 +1,7 @@
 @extends('admin.admin_layout')
 
-@section('faq')
-active
-@endsection
-
+@section('title', 'Faq')
+@section('faq', 'active')
 
 @section('content')
 <div class="section-header">
@@ -29,9 +27,9 @@ active
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($faqs as $key => $item)
+                        @forelse ($faqs as $key => $item)
                             <tr>
-                                <td class="w_50">{{ $faqs->firstItem() + $key }}</td>
+                                <td class="w_50">{{$faqs->firstItem() + $key }}</td>
                                 <td>{{ $item->title }}</td>
                                 <td>{{ $item->show == 1 ? "On Faq" : "On Home And Faq"}}</td>
                                 <td>
@@ -39,7 +37,13 @@ active
                                     <a href="{{ url('admin/faq/delete') }}/{{ $item->id }}" class="btn btn-danger btn-xs">Delete</a>
                                 </td>
                             </tr>
-                        @endforeach
+                            @empty
+                            No data to show
+                        @endforelse
+
+                        {{ $faqs->links() }}
+
+
                     </tbody>
                     </table>
                 </div>

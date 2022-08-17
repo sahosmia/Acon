@@ -1,8 +1,7 @@
 @extends('admin.admin_layout')
 
-@section('why_choose')
-active
-@endsection
+@section('title', 'Why Choose | Create')
+@section('why_choose', 'active')
 
 @section('content')
 <div class="section-header">

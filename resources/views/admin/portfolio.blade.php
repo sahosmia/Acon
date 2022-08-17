@@ -1,14 +1,8 @@
 @extends('admin.admin_layout')
 
-@section('portfolio-drop')
-active
-@endsection
-
-@section('portfolio')
-active
-@endsection
-
-
+@section('title', 'Portfolio')
+@section('portfolio', 'active')
+@section('portfolio-drop', 'active')
 
 @section('content')
 <div class="section-header">
@@ -40,19 +34,19 @@ active
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($portfolios as $key => $item)
+                            @forelse ($portfolios as $key => $item)
 
                                 <tr>
                                     <td class="w_50">{{ $portfolios->firstItem() + $key }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $portfolio_category->find($item->category_id)->name }}</td>
+                                    <td>{{ $item->protfolioCategory->name }}</td>
                                     <td><img class="img_100" src="{{ asset('uploads/portfolio') }}/{{ $item->photo }}" alt="{{ $item->photo }}"></td>
 
 
                                     <td>
-                                        <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal{{ $item->id }}">Details</a>
-                                        <a href="{{ url('admin/portfolio/edit') }}/{{ $item->id }}" class="btn btn-primary btn-xs">Edit</a>
-                                        <a href="{{ url('admin/portfolio/delete') }}/{{ $item->id }}" class="btn btn-danger btn-xs">Delete</a>
+                                        <a class="btn btn-success text-white btn-xs" data-toggle="modal" data-target="#myModal{{ $item->id }}"><i class="far fa-eye"></i></a>
+                                        <a href="{{ url('admin/portfolio/edit') }}/{{ $item->id }}" class="btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>
+                                        <a href="{{ url('admin/portfolio/delete') }}/{{ $item->id }}" class="btn btn-danger btn-xs"><i class="far fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
                                 <div class="modal fade" id="myModal{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -163,7 +157,9 @@ active
                                     </div>
                                 </div>
 
-                                @endforeach
+                            @empty
+                            no data to show
+                            @endforelse
                         </tbody>
                         </table>
                     </div>

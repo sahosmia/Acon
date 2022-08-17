@@ -1,13 +1,8 @@
 @extends('admin.admin_layout')
 
-@section('news-drop')
-active
-@endsection
-
-@section('news_category')
-active
-@endsection
-
+@section('title', 'News Category| Create')
+@section('news_category', 'active')
+@section('news-drop', 'active')
 @section('content')
 <div class="section-header">
     <h1>Add News Category</h1>
@@ -44,13 +39,6 @@ active
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
                             <div class="col-sm-12 col-md-7">
                                 <input type="text" class="form-control" name="name" value="{{ old('name') }}">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-4">
-                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Slug</label>
-                            <div class="col-sm-12 col-md-7">
-                                <input type="text" class="form-control" name="slug" value="{{ old('slug') }}">
                             </div>
                         </div>
 

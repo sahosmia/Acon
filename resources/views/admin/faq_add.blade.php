@@ -1,8 +1,7 @@
 @extends('admin.admin_layout')
 
-@section('faq')
-active
-@endsection
+@section('title', 'Faq | Create')
+@section('faq', 'active')
 
 @section('content')
 <div class="section-header">
@@ -57,6 +56,7 @@ active
                             <div class="col-sm-12 col-md-7">
                                 <select class="form-control select2" name="show"
                                     <option value="">Select Show on where</option>
+
                                     <option {{ old('show') == 1 ? "selected" : "" }} value="1">On Faq Page</option>
                                     <option {{ old('show') == 2 ? "selected" : "" }} value="2">On Home & Faq Page</option>
                                 </select>

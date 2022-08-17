@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Stisla</title>
+  <title>@yield('title')</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -41,8 +41,8 @@
             <a href="{{ route('front') }}" target="_blank" class="btn btn-dark">View Website</a>
           </li>
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-            <img alt="image" src="{{ asset('uploads/user') }}/{{ Auth::user()->photo }}" class="rounded-circle mr-1">
-            <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user()->name }}</div></a>
+            <img alt="image" src="{{ asset('uploads/user') }}/{{ auth()->user()->photo }}" class="rounded-circle mr-1">
+            <div class="d-sm-none d-lg-inline-block">Hi, {{auth()->user()->name }}</div></a>
             <div class="dropdown-menu dropdown-menu-right">
               <a href="{{ route('profile') }}" class="dropdown-item has-icon">
                 <i class="far fa-edit"></i> Edit Profile

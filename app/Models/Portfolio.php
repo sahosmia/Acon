@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Portfolio_category;
+
 
 class Portfolio extends Model
 {
@@ -19,15 +21,15 @@ class Portfolio extends Model
         'website',
         'cost',
         'client_comment',
-        'category',
+        'category_id',
         'photo',
         'banner',
         'meta_title',
         'meta_description',
     ];
 
-    public function category(){
-        return $this->hasOne(Category::class, 'id', 'blog_category_id');
+    public function protfolioCategory(){
+        return $this->hasOne(Portfolio_category::class, 'id', 'category_id');
     }
 
 

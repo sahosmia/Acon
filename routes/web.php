@@ -325,226 +325,135 @@ Route::get('admin/service/delete/{id}', [ServiceController::class, 'delete']);
 /* --------------------------------------- */
 /* settings  */
 /* --------------------------------------- */
-Route::get('admin/settings', [SettingsController::class, 'index'])
-        ->name('admin.settings');
 
-Route::post('admin/settings/logo_update', [SettingsController::class, 'logo_update'])
-        ->name('logo_update');
 
-Route::post('admin/settings/admin_logo_update', [SettingsController::class, 'admin_logo_update'])
-        ->name('admin_logo_update');
+Route::controller(SettingsController::class)->prefix('admin/settings/')->group(function(){
+
+Route::get('/', 'index')->name('admin.settings');
+Route::post('logo_update', 'logo_update')->name('logo_update');
+Route::post('admin_logo_update', 'admin_logo_update')->name('admin_logo_update');
+Route::post('favicon_update', 'favicon_update')->name('favicon_update');
+Route::post('login_bg_update', 'login_bg_update')->name('login_bg_update');
+Route::post('generel_update', 'generel_update')->name('generel_update');
+Route::post('address_icon_update', 'address_icon_update')->name('address_icon_update');
+Route::post('phone_icon_update', 'phone_icon_update')->name('phone_icon_update');
+Route::post('working_hour_icon_update', 'working_hour_icon_update')->name('working_hour_icon_update');
+Route::post('email_update', 'email_update')->name('email_update');
+Route::post('sidebar_footer_update', 'sidebar_footer_update')->name('sidebar_footer_update');
+Route::post('why_choose_update', 'why_choose_update')->name('why_choose_update');
+Route::post('why_choose_main_photo_update', 'why_choose_main_photo_update')->name('why_choose_main_photo_update');
+Route::post('why_choose_item_photo_update', 'why_choose_item_photo_update')->name('why_choose_item_photo_update');
+Route::post('service_update', 'service_update')->name('service_update');
+Route::post('portfolio_update', 'portfolio_update')->name('portfolio_update');
+Route::post('team_update', 'team_update')->name('team_update');
+Route::post('testimonial_update', 'testimonial_update')->name('testimonial_update');
+Route::post('testimonial_main_photo_update', 'testimonial_main_photo_update')->name('testimonial_main_photo_update');
+Route::post('faq_update', 'faq_update')->name('faq_update');
+Route::post('faq_main_photo_update', 'faq_main_photo_update')->name('faq_main_photo_update');
+Route::post('gallery_update', 'gallery_update')->name('gallery_update');
+Route::post('recent_post_update', 'recent_post_update')->name('recent_post_update');
+Route::post('partner_update', 'partner_update')->name('partner_update');
+Route::post('counter_bg_update', 'counter_bg_update')->name('counter_bg_update');
+Route::post('counter_update', 'counter_update')->name('counter_update');
+Route::post('total_recent_post_update', 'total_recent_post_update')->name('total_recent_post_update');
+Route::post('color_update', 'color_update')->name('color_update');
+Route::post('other_update', 'other_update')->name('other_update');
+Route::post('about_banner_update', 'about_banner_update')->name('about_banner_update');
+Route::post('faq_banner_update', 'faq_banner_update')->name('faq_banner_update');
+Route::post('gallery_banner_update', 'gallery_banner_update')->name('gallery_banner_update');
+Route::post('service_banner_update', 'service_banner_update')->name('service_banner_update');
+Route::post('portfolio_banner_update', 'portfolio_banner_update')->name('portfolio_banner_update');
+Route::post('testimonial_banner_update', 'testimonial_banner_update')->name('testimonial_banner_update');
+Route::post('news_banner_update', 'news_banner_update')->name('news_banner_update');
+Route::post('contact_banner_update', 'contact_banner_update')->name('contact_banner_update');
+Route::post('search_banner_update', 'search_banner_update')->name('search_banner_update');
+Route::post('category_banner_update', 'category_banner_update')->name('category_banner_update');
+Route::post('terms_banner_update', 'terms_banner_update')->name('terms_banner_update');
+Route::post('privacy_banner_update', 'privacy_banner_update')->name('privacy_banner_update');
 
-Route::post('admin/settings/favicon_update', [SettingsController::class, 'favicon_update'])
-        ->name('favicon_update');
+});
 
-Route::post('admin/settings/login_bg_update', [SettingsController::class, 'login_bg_update'])
-        ->name('login_bg_update');
+Route::prefix('admin')->name('admin.')->group(function() {
 
-Route::post('admin/settings/generel_update', [SettingsController::class, 'generel_update'])
-        ->name('generel_update');
 
-Route::post('admin/settings/address_icon_update', [SettingsController::class, 'address_icon_update'])
-        ->name('address_icon_update');
 
-Route::post('admin/settings/phone_icon_update', [SettingsController::class, 'phone_icon_update'])
-        ->name('phone_icon_update');
+    /* ----------------------- slider  ------------------------ */
 
-Route::post('admin/settings/working_hour_icon_update', [SettingsController::class, 'working_hour_icon_update'])
-        ->name('working_hour_icon_update');
+    Route::get('slider', [SliderController::class, 'index'])->name('slider');
+    Route::get('slider/add', [SliderController::class, 'create'])->name('slider_add');
+    Route::post('slider/insert', [SliderController::class, 'insert'])->name('slider_insert');
+    Route::get('slider/edit/{id}', [SliderController::class, 'edit_page']);
+    Route::post('slider/edit', [SliderController::class, 'edit'])->name('slider_edit');
+    Route::get('slider/delete/{id}', [SliderController::class, 'delete']);
 
-Route::post('admin/settings/email_update', [SettingsController::class, 'email_update'])
-        ->name('email_update');
 
-Route::post('admin/settings/sidebar_footer_update', [SettingsController::class, 'sidebar_footer_update'])
-        ->name('sidebar_footer_update');
 
-Route::post('admin/settings/why_choose_update', [SettingsController::class, 'why_choose_update'])
-        ->name('why_choose_update');
 
-Route::post('admin/settings/why_choose_main_photo_update', [SettingsController::class, 'why_choose_main_photo_update'])
-        ->name('why_choose_main_photo_update');
+    /* --------------- social  -------------------- */
 
-Route::post('admin/settings/why_choose_item_photo_update', [SettingsController::class, 'why_choose_item_photo_update'])
-        ->name('why_choose_item_photo_update');
+    Route::get('social', [SocialController::class, 'index'])->name('social');
+    Route::post('socail/social_update', [SocialController::class, 'social_update'])->name('social_update');
 
-Route::post('admin/settings/service_update', [SettingsController::class, 'service_update'])
-        ->name('service_update');
 
-Route::post('admin/settings/portfolio_update', [SettingsController::class, 'portfolio_update'])
-        ->name('portfolio_update');
 
-Route::post('admin/settings/team_update', [SettingsController::class, 'team_update'])
-        ->name('team_update');
+    /* --------------------- team  --------------------- */
 
-Route::post('admin/settings/testimonial_update', [SettingsController::class, 'testimonial_update'])
-        ->name('testimonial_update');
+    Route::controller(TeamController::class)->prefix('team')->group(function(){
+        Route::get('/', 'index')->name('team');
+        Route::get('/add', 'team_add')->name('team_add');
+        Route::post('/insert', 'insert')->name('team_insert');
+        Route::get('/edit/{id}', 'edit_page');
+        Route::post('/edit', 'edit')->name('team_edit');
+        Route::get('/delete/{id}', 'delete');
+    });
 
-Route::post('admin/settings/testimonial_main_photo_update', [SettingsController::class, 'testimonial_main_photo_update'])
-        ->name('testimonial_main_photo_update');
 
-Route::post('admin/settings/faq_update', [SettingsController::class, 'faq_update'])
-        ->name('faq_update');
+    /* -------------------testimonial------------------ */
 
-Route::post('admin/settings/faq_main_photo_update', [SettingsController::class, 'faq_main_photo_update'])
-        ->name('faq_main_photo_update');
+    Route::controller(TestimonialController::class)->prefix('testimonial')->group(function(){
+        Route::get('/', 'index')->name('testimonial');
+        Route::get('/add', 'testimonial_add')->name('testimonial_add');
+        Route::post('/insert', 'insert')->name('testimonial_insert');
+        Route::get('/edit/{id}', 'edit_page');
+        Route::post('/edit', 'edit')->name('testimonial_edit');
+        Route::get('/delete/{id}', 'delete');
+    });
 
-Route::post('admin/settings/gallery_update', [SettingsController::class, 'gallery_update'])
-        ->name('gallery_update');
 
-Route::post('admin/settings/recent_post_update', [SettingsController::class, 'recent_post_update'])
-        ->name('recent_post_update');
+    /*-------------------- why_choose ------------------- */
 
-Route::post('admin/settings/partner_update', [SettingsController::class, 'partner_update'])
-        ->name('partner_update');
+    Route::controller(Why_chooseController::class)->prefix('why_choose')->group(function(){
+        Route::get('/', 'index')->name('why_choose');
+        Route::get('/add', 'why_choose_add')->name('why_choose_add');
+        Route::post('/insert','insert')->name('why_choose_insert');
+        Route::get('/edit/{id}', 'edit_page');
+        Route::post('/edit', 'edit')->name('why_choose_edit');
+        Route::get('/delete/{id}', 'delete');
+    });
 
-Route::post('admin/settings/counter_bg_update', [SettingsController::class, 'counter_bg_update'])
-        ->name('counter_bg_update');
+});
 
-Route::post('admin/settings/counter_update', [SettingsController::class, 'counter_update'])
-        ->name('counter_update');
 
-Route::post('admin/settings/total_recent_post_update', [SettingsController::class, 'total_recent_post_update'])
-        ->name('total_recent_post_update');
 
-Route::post('admin/settings/color_update', [SettingsController::class, 'color_update'])
-        ->name('color_update');
 
-Route::post('admin/settings/other_update', [SettingsController::class, 'other_update'])
-        ->name('other_update');
 
-Route::post('admin/settings/about_banner_update', [SettingsController::class, 'about_banner_update'])
-        ->name('about_banner_update');
+// complete list
 
-Route::post('admin/settings/faq_banner_update', [SettingsController::class, 'faq_banner_update'])
-        ->name('faq_banner_update');
+// why_choose
+// testimonial
+//team
+//
+//
+//
 
-Route::post('admin/settings/gallery_banner_update', [SettingsController::class, 'gallery_banner_update'])
-        ->name('gallery_banner_update');
 
-Route::post('admin/settings/service_banner_update', [SettingsController::class, 'service_banner_update'])
-        ->name('service_banner_update');
 
-Route::post('admin/settings/portfolio_banner_update', [SettingsController::class, 'portfolio_banner_update'])
-        ->name('portfolio_banner_update');
 
-Route::post('admin/settings/testimonial_banner_update', [SettingsController::class, 'testimonial_banner_update'])
-        ->name('testimonial_banner_update');
 
-Route::post('admin/settings/news_banner_update', [SettingsController::class, 'news_banner_update'])
-        ->name('news_banner_update');
 
-Route::post('admin/settings/contact_banner_update', [SettingsController::class, 'contact_banner_update'])
-        ->name('contact_banner_update');
+// pendinng
 
-Route::post('admin/settings/search_banner_update', [SettingsController::class, 'search_banner_update'])
-        ->name('search_banner_update');
-
-Route::post('admin/settings/category_banner_update', [SettingsController::class, 'category_banner_update'])
-        ->name('category_banner_update');
-
-Route::post('admin/settings/terms_banner_update', [SettingsController::class, 'terms_banner_update'])
-        ->name('terms_banner_update');
-
-Route::post('admin/settings/privacy_banner_update', [SettingsController::class, 'privacy_banner_update'])
-        ->name('privacy_banner_update');
-
-
-
-/* --------------------------------------- */
-/* slider  */
-/* --------------------------------------- */
-
-
-Route::get('admin/slider', [SliderController::class, 'index'])
-        ->name('admin.slider');
-
-Route::get('admin/slider/add', [SliderController::class, 'create'])
-        ->name('admin.slider_add');
-
-Route::post('admin/slider/insert', [SliderController::class, 'insert'])
-        ->name('admin.slider_insert');
-
-Route::get('admin/slider/edit/{id}', [SliderController::class, 'edit_page']);
-
-Route::post('admin/slider/edit', [SliderController::class, 'edit'])
-        ->name('admin.slider_edit');
-
-Route::get('admin/slider/delete/{id}', [SliderController::class, 'delete']);
-
-
-/* --------------------------------------- */
-/* social  */
-/* --------------------------------------- */
-Route::get('admin/social', [SocialController::class, 'index'])
-        ->name('admin.social');
-
-Route::post('admin/socail/social_update', [SocialController::class, 'social_update'])
-        ->name('admin.social_update');
-
-
-
-/* --------------------------------------- */
-/* team  */
-/* --------------------------------------- */
-Route::get('admin/team', [TeamController::class, 'index'])
-        ->name('admin.team');
-
-Route::get('admin/team/add', [TeamController::class, 'team_add'])
-        ->name('admin.team_add');
-
-Route::post('admin/team/insert', [TeamController::class, 'insert'])
-        ->name('admin.team_insert');
-
-Route::get('admin/team/edit/{id}', [TeamController::class, 'edit_page']);
-
-Route::post('admin/team/edit', [TeamController::class, 'edit'])
-        ->name('admin.team_edit');
-
-Route::get('admin/team/delete/{id}', [TeamController::class, 'delete']);
-
-
-/* --------------------------------------- */
-/* testimonial  */
-/* --------------------------------------- */
-Route::get('admin/testimonial', [TestimonialController::class, 'index'])
-        ->name('admin.testimonial');
-
-Route::get('admin/testimonial/add', [TestimonialController::class, 'testimonial_add'])
-        ->name('admin.testimonial_add');
-
-Route::post('admin/testimonial/insert', [TestimonialController::class, 'insert'])
-        ->name('admin.testimonial_insert');
-
-Route::get('admin/testimonial/edit/{id}', [TestimonialController::class, 'edit_page']);
-
-Route::post('admin/testimonial/edit', [TestimonialController::class, 'edit'])
-        ->name('admin.testimonial_edit');
-
-Route::get('admin/testimonial/delete/{id}', [TestimonialController::class, 'delete']);
-
-
-/* --------------------------------------- */
-/* why_choose  */
-/* --------------------------------------- */
-Route::get('admin/why_choose', [Why_chooseController::class, 'index'])
-        ->name('admin.why_choose');
-
-Route::get('admin/why_choose/add', [Why_chooseController::class, 'why_choose_add'])
-        ->name('admin.why_choose_add');
-
-Route::post('admin/why_choose/insert', [Why_chooseController::class, 'insert'])
-        ->name('admin.why_choose_insert');
-
-Route::get('admin/why_choose/edit/{id}', [Why_chooseController::class, 'edit_page']);
-
-Route::post('admin/why_choose/edit', [Why_chooseController::class, 'edit'])
-        ->name('admin.why_choose_edit');
-
-Route::get('admin/why_choose/delete/{id}', [Why_chooseController::class, 'delete']);
-
-
-
-
+//social -> check spaling in url
 
 
 

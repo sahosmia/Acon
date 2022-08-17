@@ -1,8 +1,7 @@
 @extends('admin.admin_layout')
 
-@section('service')
-active
-@endsection
+@section('title', 'Service | Update')
+@section('service', 'active')
 
 @section('content')
 <div class="section-header">
@@ -25,17 +24,16 @@ active
                         </div>
                     @endif
 
-                    @php
-                        $all_fild = ['photo', 'banner', 'heading', 'short_content', 'content', 'meta_title', 'meta_description'];
-                    @endphp
-
-                    @foreach ($all_fild as $item)
-                        @error($item)
+                    @if ($errors->any())
                         <div class="alert alert-danger">
-                            <p>{{ $message }}</p>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
-                        @enderror
-                    @endforeach
+                    @endif
+
 
                     <form action="{{ route('admin.service_edit') }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                         @csrf
@@ -46,7 +44,7 @@ active
                                 <input type="text" class="form-control" name="heading" value="{{ $service->heading }}">
                             </div>
                         </div>
-                        
+
 
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Short Content</label>

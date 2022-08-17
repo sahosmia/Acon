@@ -1,12 +1,8 @@
 @extends('admin.admin_layout')
 
-@section('news-drop')
-active
-@endsection
-
-@section('news_category')
-active
-@endsection
+@section('title', 'News Category| Update')
+@section('news_category', 'active')
+@section('news-drop', 'active')
 
 @section('content')
 <div class="section-header">
@@ -29,17 +25,15 @@ active
                         </div>
                     @endif
 
-                    @php
-                        $all_fild = ['name', 'meta_title', 'meta_description'];
-                    @endphp
-
-                    @foreach ($all_fild as $item)
-                        @error($item)
+                    @if ($errors->any())
                         <div class="alert alert-danger">
-                            <p>{{ $message }}</p>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
-                        @enderror
-                    @endforeach
+                    @endif
 
                     <form action="{{ route('admin.news_category_edit') }}" method="POST">
                     @csrf
@@ -51,12 +45,6 @@ active
                             </div>
                         </div>
 
-                        <div class="form-group row mb-4">
-                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Slug</label>
-                            <div class="col-sm-12 col-md-7">
-                                <input type="text" class="form-control" name="slug" value="{{ $news_categorys->slug }}">
-                            </div>
-                        </div>
 
                         <h6 class="p-2 seo-info">SEO Information</h6>
 

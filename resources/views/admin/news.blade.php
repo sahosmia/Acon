@@ -1,12 +1,9 @@
 @extends('admin.admin_layout')
 
-@section('news-drop')
-active
-@endsection
+@section('title', 'News')
+@section('news', 'active')
+@section('news-drop', 'active')
 
-@section('news')
-active
-@endsection
 
 @section('content')
 <div class="section-header">
@@ -37,22 +34,23 @@ active
           </thead>
           <tbody>
 
-              @foreach ($newss as $key => $item)
-                  <tr>
-                      <td>{{ $newss->firstItem() + $key }}</td>
-                      <td><img class="img_200" src="{{ asset('uploads/news') }}/{{ $item->photo }}" alt="{{ $item->title }}"></td>
-                      <td><img class="img_200" src="{{ asset('uploads/banner') }}/{{ $item->banner }}" alt="{{ $item->title }}"></td>
-                      <td>{{ $item->title }}</td>
-                      <td>{{ $news_category->find($item->category_id)->name }}</td>
+              @forelse ($newss as $key => $item)
+                <tr>
+                    <td>{{ $newss->firstItem() + $key }}</td>
+                    <td><img class="img_200" src="{{ asset('uploads/news') }}/{{ $item->photo }}" alt="{{ $item->title }}"></td>
+                    <td><img class="img_200" src="{{ asset('uploads/banner') }}/{{ $item->banner }}" alt="{{ $item->title }}"></td>
+                    <td>{{ $item->title }}</td>
+                    <td>{{ $news_category->find($item->category_id)->name }}</td>
 
 
-                      <td>
-                          <a href="{{ url('admin/news/edit') }}/{{ $item->id }}" class="btn btn-primary btn-xs">Edit</a>
-                          <a href="{{ url('admin/news/delete') }}/{{ $item->id }}" class="btn btn-danger btn-xs">Delete</a>
-                      </td>
-                  </tr>
-
-                @endforeach
+                    <td>
+                        <a href="{{ url('admin/news/edit') }}/{{ $item->id }}" class="btn btn-primary btn-xs">Edit</a>
+                        <a href="{{ url('admin/news/delete') }}/{{ $item->id }}" class="btn btn-danger btn-xs">Delete</a>
+                    </td>
+                </tr>
+              @empty
+                No data to show
+              @endforelse
           </tbody>
         </table>
       </div>

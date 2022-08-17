@@ -1,8 +1,8 @@
 @extends('admin.admin_layout')
 
-@section('slider')
-active
-@endsection
+@section('title', 'Slider | Create')
+@section('slider', 'active')
+
 
 @section('content')slider
 <div class="section-header">

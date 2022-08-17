@@ -1,8 +1,8 @@
 @extends('admin.admin_layout')
 
-@section('partner')
-active
-@endsection
+@section('title', 'Partner | Create')
+@section('partner', 'active')
+
 
 @section('content')
 <div class="section-header">

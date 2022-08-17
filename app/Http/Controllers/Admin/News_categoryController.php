@@ -34,7 +34,6 @@ class News_categoryController extends Controller
     public function insert(Request $req)
     {
         $name = $req->name;
-        $slug = $req->slug;
         $meta_title = $req->meta_title;
         $meta_description = $req->meta_description;
         $created_at = Carbon::now();
@@ -45,17 +44,12 @@ class News_categoryController extends Controller
             'meta_description' => 'required',
         ]);
 
-        if ($slug == '') {
-            $slug = Str::slug($name);
-        } else {
-            $slug = Str::slug($slug);
-        }
-
+        $slug = strtolower(str_replace(" ","-",$req->name));
         $count = News_category::where('slug', $slug)->count();
-
         if ($count != 0) {
-           $slug = $slug.'-1';
+            $slug = $slug.'-1';
         }
+
 
         News_category::insert([
             "name" => $name,
@@ -79,7 +73,6 @@ class News_categoryController extends Controller
     public function edit(Request $req)
     {
         $id = $req->id;
-        $slug = $req->slug;
         $name = $req->name;
         $meta_title = $req->meta_title;
         $meta_description = $req->meta_description;
@@ -90,23 +83,9 @@ class News_categoryController extends Controller
             'meta_description' => 'required',
         ]);
 
-        if ($slug == '') {
-            $slug = Str::slug($name);
-        } else {
-            $slug = Str::slug($slug);
-        }
-
-
-        $count = News_category::where('slug', $slug)->count();
-
-        if ($count > 1) {
-            $slug = $slug.'-1';
-        }
-
 
         News_category::find($id)->update([
             "name" => $name,
-            "slug" => $slug,
             "meta_title" => $meta_title,
             "meta_description" => $meta_description,
         ]);

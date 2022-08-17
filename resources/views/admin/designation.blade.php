@@ -1,12 +1,8 @@
 @extends('admin.admin_layout')
 
-@section('team-drop')
-active
-@endsection
-
-@section('designation')
-active
-@endsection
+@section('title', 'Designation')
+@section('designation', 'active')
+@section('team-drop', 'active')
 
 @section('content')
 <div class="section-header">
@@ -35,7 +31,7 @@ active
                 </tr>
               </thead>
               <tbody>
-                @foreach ($designations as $key => $item)
+                @forelse ($designations as $key => $item)
                     <tr>
                         <td class="w_50">{{ $designations->firstItem() + $key }}</td>
                         <td>{{ $item->designation_name }}</td>
@@ -44,8 +40,9 @@ active
                             <a href="{{ url('admin/designation/delete') }}/{{ $item->id }}" class="btn btn-danger btn-xs">Delete</a>
                         </td>
                     </tr>
-
-                @endforeach
+                @empty
+                No data to show
+                @endforelse
               </tbody>
             </table>
           </div>

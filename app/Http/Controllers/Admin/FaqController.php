@@ -19,7 +19,7 @@ class FaqController extends Controller
      public function index()
      {
          return view('admin.faq', [
-             'faqs' => Faq::paginate(10),
+             'faqs' => Faq::paginate(2),
          ]);
      }
 
