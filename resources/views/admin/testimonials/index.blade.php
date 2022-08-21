@@ -8,7 +8,7 @@
 <div class="section-header">
     <h1>View Testimonial</h1>
     <div class="ml-auto">
-        <a href="{{ route('admin.testimonial_add') }}" class="btn btn-primary">Add New</a>
+        <a href="{{ route('admin.testimonials.create') }}" class="btn btn-primary">Add New</a>
     </div>
 </div>
 
@@ -27,8 +27,6 @@
                             <th>SL</th>
                             <th>Photo</th>
                             <th>Name</th>
-                            <th>Designation</th>
-                            <th>Company</th>
                             <th>Comment</th>
                             <th class="w_200">Action</th>
                         </tr>
@@ -37,22 +35,23 @@
 
                         @forelse ($testimonials as $key => $item)
                             <tr>
-                                <td class="w_50">{{ $testimonials->firstItem() + $key }}</td>
-
+                                <td>{{ $testimonials->firstItem() + $key }}</td>
                                 <td><img class="img_bg_deep img_100" src="{{ asset('uploads/testimonial') }}/{{ $item->photo }}" alt="{{ $item->photo }}"></td>
                                 <td>{{ $item->name }}</td>
-                                <td>{{ $item->designation }}</td>
-                                <td>{{ $item->company }}</td>
                                 <td>{{ $item->comment }}</td>
-
                                 <td>
-                                    <a href="{{ url('admin/testimonial/edit') }}/{{ $item->id }}" class="btn btn-primary btn-xs">Edit</a>
-                                    <a href="{{ url('admin/testimonial/delete') }}/{{ $item->id }}" class="btn btn-danger btn-xs">Delete</a>
+                                    <a href="{{ route('admin.testimonials.edit', $item->id) }}" class="btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>
+                                    <form action="{{ route('admin.testimonials.destroy', $item->id) }}" method="post" class="d-inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-xs"><i class="far fa-trash-alt"></i></button>
+                                    </form>
                                 </td>
                             </tr>
-                            @empty
+                            
+                        @empty
                             No data to show
-                            @endforelse
+                        @endforelse
                     </tbody>
                     </table>
                 </div>

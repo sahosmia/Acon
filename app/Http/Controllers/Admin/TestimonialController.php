@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TestimonialCreateRequest;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -10,26 +11,20 @@ use Image;
 
 class TestimonialController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    // view page
+
     public function index()
     {
-        return view('admin.testimonial', [
+        return view('admin.testimonials.index', [
             'testimonials' => Testimonial::paginate(10),
         ]);
     }
 
-    // insert page
-    public function testimonial_add()
+    public function create()
     {
-        return view('admin.testimonial_add');
+        return view('admin.testimonials.create');
     }
 
-    // insert
-    public function insert(Request $req)
+    public function store(TestimonialCreateRequest $req)
     {
         $name = $req->name;
         $designation = $req->designation;
@@ -39,13 +34,7 @@ class TestimonialController extends Controller
         $created_at = Carbon::now();
 
 
-        $req->validate([
-            'name' => 'required',
-            'designation' => 'required',
-            'company' => 'required',
-            'comment' => 'required',
-            'photo' => 'required|file|image|mimes:jpeg,jpg,png',
-        ]);
+
 
         $id = Testimonial::insertGetId([
             "name" => $name,
@@ -65,22 +54,22 @@ class TestimonialController extends Controller
         ]);
 
         return back()->with('success', 'You are success to add testimonial item');
+
+
+
     }
 
 
 
-    // edit page
-    public function edit_page($id)
+    public function edit($id)
     {
-        return view('admin.testimonial_edit', [
+        return view('admin.testimonials.edit', [
             'testimonial' => Testimonial::find($id),
         ]);
     }
 
-    // edit
-    public function edit(Request $req)
+    public function update(Request $req, $id)
     {
-        $id = $req->id;
         $name = $req->name;
         $designation = $req->designation;
         $company = $req->company;
@@ -124,8 +113,7 @@ class TestimonialController extends Controller
         return back()->with('success', 'You are success to update testimonial item');
     }
 
-    // p_delete single
-    public function delete($id)
+    public function destroy($id)
     {
         $photo = Testimonial::find($id)->photo;
         unlink('uploads/testimonial/' . $photo);

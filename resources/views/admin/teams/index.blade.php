@@ -25,7 +25,6 @@
                     <thead>
                         <tr>
                             <th>SL</th>
-                            <th>Photo</th>
                             <th>Name</th>
                             <th>Designation</th>
                             <th class="w_200">Action</th>
@@ -36,7 +35,6 @@
                         @forelse ($teams as $key => $item)
                             <tr>
                                 <td class="w_50">{{ $teams->firstItem() + $key }}</td>
-                                <td><img class="img_200" src="{{ asset('uploads/team') }}/{{ $item->photo }}" alt="{{ $item->photo }}"></td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $designation->find($item->designation_id)->designation_name }}</td>
                                 <td>

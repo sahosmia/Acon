@@ -389,17 +389,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function() {
         Route::get('/delete/{id}', 'delete');
     });
 
-
-    /* -------------------testimonial------------------ */
-    Route::controller(TestimonialController::class)->prefix('testimonial')->group(function(){
-        Route::get('/', 'index')->name('testimonial');
-        Route::get('/add', 'testimonial_add')->name('testimonial_add');
-        Route::post('/insert', 'insert')->name('testimonial_insert');
-        Route::get('/edit/{id}', 'edit_page');
-        Route::post('/edit', 'edit')->name('testimonial_edit');
-        Route::get('/delete/{id}', 'delete');
-    });
-
+    Route::resource('testimonials', TestimonialController::class);
     Route::resource('why-chooses', Why_chooseController::class);
 });
 

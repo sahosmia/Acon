@@ -15,19 +15,7 @@
             <div class="card">
                 <div class="card-body">
 
-                    @if(session()->has('success'))
-                        <div class="alert alert-success">
-                            <p>{{ session()->get('success') }}</p>
-                        </div>
-                    @endif
-
-                    @foreach ($languages as $item)
-                        @error($item->name)
-                        <div class="alert alert-danger">
-                            <p>{{ $message }}</p>
-                        </div>
-                        @enderror
-                    @endforeach
+                    @include('include.message')
 
                     <form action="{{ route('admin.language_edit') }}" method="POST">
                         @csrf

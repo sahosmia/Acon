@@ -41,11 +41,11 @@
                                 <td>{{ $item->content }}</td>
 
                                 <td>
-                                    <a href="{{ route('admin.why-chooses.edit', $item->id) }}" class="btn btn-primary btn-xs">Edit</a>
+                                    <a href="{{ route('admin.why-chooses.edit', $item->id) }}" class="btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>
                                     <form action="{{ route('admin.why-chooses.destroy', $item->id) }}" method="post" class="d-inline-block">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-xs">Delete</button>
+                                        <button type="submit" class="btn btn-danger btn-xs"><i class="far fa-trash-alt"></i></button>
                                     </form>
                                 </td>
                             </tr>

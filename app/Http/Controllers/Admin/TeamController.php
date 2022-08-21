@@ -13,27 +13,21 @@ use Image;
 
 class TeamController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    // view page
+
     public function index()
     {
-        return view('admin.team', [
+        return view('admin.teams.index', [
             'teams' => Team::paginate(10),
         ]);
     }
 
-    // insert page
     public function team_add()
     {
-        return view('admin.team_add', [
+        return view('admin.teams.create', [
             'designations' => Designation::all(),
         ]);
     }
 
-    // insert
     public function insert(Request $req)
     {
         $name = $req->name;
@@ -89,17 +83,15 @@ class TeamController extends Controller
 
 
 
-    // edit page
     public function edit_page($id)
     {
-        return view('admin.team_edit', [
+        return view('admin.teams.edit', [
             'team' => Team::find($id),
             'designations' => Designation::all(),
 
         ]);
     }
 
-    // edit
     public function edit(Request $req)
     {
         $id = $req->id;
@@ -163,7 +155,6 @@ class TeamController extends Controller
         return back()->with('success', 'You are success to update team member');
     }
 
-    // p_delete single
     public function delete($id)
     {
         $photo = Team::find($id)->photo;

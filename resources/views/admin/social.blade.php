@@ -17,21 +17,7 @@
                 <div class="card-body">
                     <p class="text-danger">If you do not want to show a social media in your front end page, just leave the input field blank.</p>
 
-                    @if(session()->has('success'))
-                        <div class="alert alert-success">
-                            <p>{{ session()->get('success') }}</p>
-                        </div>
-                    @endif
-
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                    @include('include.message')
 
                     <form action="{{ route('admin.social_update') }}" method="POST">
                     @csrf

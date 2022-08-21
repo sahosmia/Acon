@@ -18,25 +18,10 @@
             <div class="card">
                 <div class="card-body">
 
-                    @if(session()->has('success'))
-                        <div class="alert alert-success">
-                            <p>{{ session()->get('success') }}</p>
-                        </div>
-                    @endif
-
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                    @include('include.message')
 
                     <form action="{{ route('admin.portfolio_category_insert') }}" method="POST">
                     @csrf
-
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
                             <div class="col-sm-12 col-md-7">

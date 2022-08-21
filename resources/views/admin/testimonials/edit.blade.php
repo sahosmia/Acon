@@ -7,7 +7,7 @@
 <div class="section-header">
     <h1>Edit Testimonial</h1>
     <div class="ml-auto">
-        <a href="{{ route('admin.testimonial') }}" class="btn btn-primary">View All</a>
+        <a href="{{ route('admin.testimonials.index') }}" class="btn btn-primary">View All</a>
     </div>
 </div>
 
@@ -34,9 +34,9 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('admin.testimonial_edit') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.testimonials.update', $testimonial->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" value="{{ $testimonial->id }}" name="id">
+                    @method("PUT")
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
                             <div class="col-sm-12 col-md-7">

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\WhyChooseCreateRequest;
 use App\Models\Why_choose;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 use Image;
 
 class Why_chooseController extends Controller
@@ -23,36 +25,27 @@ class Why_chooseController extends Controller
         return view('admin.why-chooses.create');
     }
 
-    public function store(Request $req)
+    public function store(WhyChooseCreateRequest $request)
     {
+        $inputs = $request->only('heading','content');
+        $inputs['created_at'] =  Carbon::now();
 
-        $heading = $req->heading;
-        $content = $req->content;
-        $photo = $req->file('photo');
-        $created_at = Carbon::now();
+        if($request->hasFile('photo')){
+            $image = $request->file('photo');
+            $filename = "why_choose_" .time().'.'.$image->getClientOriginalExtension();
+            $location = public_path('uploads/why_choose/'.$filename);
+            Image::make($image)->save($location);
+            $inputs['photo'] =  $filename;
+        }
 
-        $req->validate([
-            'heading' => 'required',
-            'content' => 'required',
-            'photo' => 'required|file|image|mimes:jpeg,jpg,png',
-        ]);
-
-        $id = Why_choose::insertGetId([
-            "heading" => $heading,
-            "content" => $content,
-            "created_at" => $created_at,
-        ]);
-
-        $photo = $req->file('photo');
-        $photo_extention = $photo->getClientOriginalExtension();
-        $photo_name = "why_choose_" .$id ."." . $photo_extention;
-        Image::make($photo)->save(base_path('public/uploads/why_choose/' . $photo_name));
-
-        Why_choose::find($id)->update([
-            "photo" => $photo_name,
-        ]);
-
-        return back()->with('success', 'You are success to add why choose item');
+        try{
+            Why_choose::create($inputs);
+            Session::flash('success', 'You are success to add your item');
+            return back();
+        }catch (\Exception $exception){
+            Session::flash('error',$exception->getMessage());
+            return back();
+        }
     }
 
 

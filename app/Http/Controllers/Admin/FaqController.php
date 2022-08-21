@@ -11,14 +11,11 @@ use Carbon\Carbon;
 
 class FaqController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-     // view page
+
+
      public function index()
      {
-         return view('admin.faq', [
+         return view('admin.faqs.index', [
              'faqs' => Faq::paginate(2),
          ]);
      }
@@ -26,7 +23,7 @@ class FaqController extends Controller
      // insert page
      public function faq_add()
      {
-         return view('admin.faq_add');
+         return view('admin.faqs.create');
      }
 
      // insert
@@ -56,7 +53,7 @@ class FaqController extends Controller
      // edit page
      public function edit_page($id)
      {
-         return view('admin.faq_edit', [
+         return view('admin.faqs.edit', [
              'faq' => faq::find($id),
          ]);
      }

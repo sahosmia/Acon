@@ -11,11 +11,7 @@ use Carbon\Carbon;
 
 class Portfolio_categoryController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    // view page
+
     public function index()
     {
         return view('admin.portfolio_category', [

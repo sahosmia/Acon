@@ -8,7 +8,7 @@
 <div class="section-header">
     <h1>Add Testimonial</h1>
     <div class="ml-auto">
-        <a href="{{ route('admin.testimonial') }}" class="btn btn-primary">View All</a>
+        <a href="{{ route('admin.testimonials.index') }}" class="btn btn-primary">View All</a>
     </div>
 </div>
 
@@ -19,23 +19,9 @@
             <div class="card">
                 <div class="card-body">
 
-                    @if(session()->has('success'))
-                        <div class="alert alert-success">
-                            <p>{{ session()->get('success') }}</p>
-                        </div>
-                    @endif
+                   @include('include.message')
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-                    <form action="{{ route('admin.testimonial_insert') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.testimonials.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>

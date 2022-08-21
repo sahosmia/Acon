@@ -18,21 +18,7 @@
             <div class="card">
                 <div class="card-body">
 
-                    @if(session()->has('success'))
-                        <div class="alert alert-success">
-                            <p>{{ session()->get('success') }}</p>
-                        </div>
-                    @endif
-
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                    @include('include.message')
 
                     <form action="{{ route('admin.why-chooses.update', $why_choose->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf

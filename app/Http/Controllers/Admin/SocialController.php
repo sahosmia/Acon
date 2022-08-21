@@ -8,11 +8,7 @@ use Illuminate\Http\Request;
 
 class SocialController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-     // view page
+    
      public function index()
      {
          return view('admin.social', [
