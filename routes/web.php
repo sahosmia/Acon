@@ -19,9 +19,11 @@ use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\Why_chooseController;
+use App\Http\Controllers\Admin\WhyChooseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 
 Route::controller(FrontController::class)->group(function(){
     Route::get('/', 'index')->name('front');
@@ -74,21 +76,7 @@ Route::post('admin/comment/edit', [CommentController::class, 'edit'])->name('adm
 /* --------------------------------------- */
 /* designation  */
 /* --------------------------------------- */
-Route::get('admin/designation', [DesignationController::class, 'index'])
-        ->name('admin.designation');
 
-Route::get('admin/designation/add', [DesignationController::class, 'designation_add_page'])
-        ->name('admin.designation_add');
-
-Route::post('admin/designation/insert', [DesignationController::class, 'insert'])
-        ->name('admin.designation_insert');
-
-Route::get('admin/designation/edit/{id}', [DesignationController::class, 'edit_page']);
-
-Route::post('admin/designation/edit', [DesignationController::class, 'edit'])
-        ->name('admin.designation_edit');
-
-Route::get('admin/designation/delete/{id}', [DesignationController::class, 'delete']);
 
 
 /* --------------------------------------- */
@@ -222,29 +210,8 @@ Route::post('admin/page/privacy_page_update', [PageController::class, 'privacy_p
         ->name('privacy_page_update');
 
 
-
-
-
-/* --------------------------------------- */
-/* Portfolio  */
-/* --------------------------------------- */
-Route::get('admin/portfolio', [PortfolioController::class, 'index'])
-        ->name('admin.portfolio');
-
-Route::get('admin/portfolio/add', [PortfolioController::class, 'portfolio_add'])
-        ->name('admin.portfolio_add');
-
-Route::post('admin/portfolio/insert', [PortfolioController::class, 'insert'])
-        ->name('admin.portfolio_insert');
-
-Route::get('admin/portfolio/edit/{id}', [PortfolioController::class, 'edit_page']);
-
-Route::post('admin/portfolio/edit', [PortfolioController::class, 'edit'])
-        ->name('admin.portfolio_edit');
-
-Route::get('admin/portfolio/delete/{id}', [PortfolioController::class, 'delete']);
-
 Route::get('admin/portfolio/delete/portfolio_photo/{id}', [PortfolioController::class, 'portfolio_photo_delete']);
+
 
 
 /* --------------------------------------- */
@@ -389,31 +356,21 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function() {
         Route::get('/delete/{id}', 'delete');
     });
 
+
+
+
+
+
+    Route::resource('portfolios', PortfolioController::class);
+    Route::resource('designations', DesignationController::class);
     Route::resource('testimonials', TestimonialController::class);
-    Route::resource('why-chooses', Why_chooseController::class);
+    Route::resource('why-chooses', WhyChooseController::class);
 });
 
 
 
 
 
-// complete list
-
-// why_choose
-// testimonial
-//team
-//
-//
-//
-
-
-
-
-
-
-// pendinng
-
-//social -> check spaling in url
 
 
 

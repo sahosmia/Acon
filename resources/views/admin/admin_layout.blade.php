@@ -77,13 +77,13 @@
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-bars"></i> <span>Portfolio</span></a>
                 <ul class="dropdown-menu">
                   <li class="@yield('portfolio_category')"><a class="nav-link" href="{{ route('admin.portfolio_category') }}">Portfolio Category</a></li>
-                  <li class="@yield('portfolio')"><a class="nav-link" href="{{ route('admin.portfolio') }}">Portfolio</a></li>
+                  <li class="@yield('portfolio')"><a class="nav-link" href="{{ route('admin.portfolios.index') }}">Portfolio</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown @yield('team-drop')">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fa fa-users"></i> <span>Team Member</span></a>
                 <ul class="dropdown-menu">
-                  <li class="@yield('designation')"><a class="nav-link" href="{{ route('admin.designation') }}">Dasignation</a></li>
+                  <li class="@yield('designation')"><a class="nav-link" href="{{ route('admin.designations.index') }}">Dasignation</a></li>
                   <li class="@yield('team')"><a class="nav-link" href="{{ route('admin.team') }}">Team Member</a></li>
                 </ul>
               </li>

@@ -13,7 +13,7 @@ class PhotoController extends Controller
 
    public function index()
    {
-       return view('admin.photo', [
+       return view('admin.photos.index', [
            'photos' => Photo::paginate(10),
        ]);
    }
@@ -21,7 +21,7 @@ class PhotoController extends Controller
    // insert page
    public function photo_add()
    {
-       return view('admin.photo_add');
+       return view('admin.photos.create');
    }
 
    // insert
@@ -60,7 +60,7 @@ class PhotoController extends Controller
    // edit page
    public function edit_page($id)
    {
-       return view('admin.photo_edit', [
+       return view('admin.photos.edit', [
            'photo' => Photo::find($id),
        ]);
    }

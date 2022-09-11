@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PartnerCreateRequest;
+use App\Http\Requests\PartnerEditRequest;
 use App\Models\Partner;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Image;
 
@@ -14,7 +15,7 @@ class PartnerController extends Controller
 
      public function index()
      {
-         return view('admin.partner', [
+         return view('admin.partners.index', [
              'partners' => Partner::paginate(10),
          ]);
      }
@@ -22,20 +23,15 @@ class PartnerController extends Controller
      // insert page
      public function partner_add()
      {
-         return view('admin.partner_add');
+         return view('admin.partners.create');
      }
 
      // insert
-     public function insert(Request $req)
+     public function insert(PartnerCreateRequest $req)
      {
          $name = $req->name;
          $photo = $req->file('photo');
          $created_at = Carbon::now();
-
-         $req->validate([
-             'name' => 'required',
-             'photo' => 'required|file|image|mimes:jpeg,jpg,png',
-         ]);
 
          $id = Partner::insertGetId([
              "name" => $name,
@@ -60,21 +56,19 @@ class PartnerController extends Controller
      // edit page
      public function edit_page($id)
      {
-         return view('admin.partner_edit', [
+         return view('admin.partners.edit', [
              'partner' => Partner::find($id),
          ]);
      }
 
      // edit
-     public function edit(Request $req)
+     public function edit(PartnerEditRequest $req)
      {
          $id = $req->id;
          $name = $req->name;
          $photo = $req->file('photo');
 
-         $req->validate([
-            'name' => 'required',
-         ]);
+
          if($photo){
             $req->validate([
                 'photo' => 'required|file|image|mimes:jpeg,jpg,png',

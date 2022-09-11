@@ -24,7 +24,8 @@ class WhyChooseEditRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'heading' => 'required',
+            'content' => 'required',
         ];
     }
 }

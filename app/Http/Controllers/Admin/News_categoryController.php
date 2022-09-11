@@ -12,10 +12,11 @@ use Illuminate\Support\Str;
 
 class News_categoryController extends Controller
 {
-    
+
     public function index()
     {
-        return view('admin.news_category', [
+        return view('admin.news-categories.index
+        ', [
             'news_categorys' => News_category::paginate(10),
         ]);
     }
@@ -23,7 +24,7 @@ class News_categoryController extends Controller
     // insert page
     public function news_category_add()
     {
-        return view('admin.news_category_add');
+        return view('admin.news-categories.create');
     }
 
     // insert
@@ -60,7 +61,7 @@ class News_categoryController extends Controller
     // edit page
     public function edit_page($id)
     {
-        return view('admin.news_category_edit',[
+        return view('admin.news-categories.edit',[
            'news_categorys' => News_category::find($id),
         ]);
     }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Portfolio;
+use App\Http\Requests\PortfolioCategoryCreateRequest;
+use App\Http\Requests\PortfolioCategoryEditRequest;
 use App\Models\Portfolio_category;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 
@@ -14,7 +14,7 @@ class Portfolio_categoryController extends Controller
 
     public function index()
     {
-        return view('admin.portfolio_category', [
+        return view('admin.portfolio-categories.index', [
             'portfolio_categorys' => Portfolio_category::paginate(10),
         ]);
     }
@@ -22,20 +22,15 @@ class Portfolio_categoryController extends Controller
     // insert page
     public function portfolio_category_add()
     {
-        return view('admin.portfolio_category_add');
+        return view('admin.portfolio-categories.create');
     }
 
     // insert
-    public function insert(Request $req)
+    public function insert(PortfolioCategoryCreateRequest $req)
     {
         $name = $req->name;
         $status = $req->status;
         $created_at = Carbon::now();
-
-        $req->validate([
-            'name' => 'required',
-            'status' => 'required',
-        ]);
 
         Portfolio_category::insert([
             "name" => $name,
@@ -48,22 +43,17 @@ class Portfolio_categoryController extends Controller
     // edit page
     public function edit_page($id)
     {
-        return view('admin.portfolio_category_edit', [
+        return view('admin.portfolio-categories.edit', [
             'portfolio_categorys' => Portfolio_category::find($id),
         ]);
     }
 
     // edit
-    public function edit(Request $req)
+    public function edit(PortfolioCategoryEditRequest $req)
     {
         $id = $req->id;
         $name = $req->name;
         $status = $req->status;
-
-        $req->validate([
-            'name' => 'required',
-            'status' => 'required',
-        ]);
 
         Portfolio_category::find($id)->update([
             "name" => $name,

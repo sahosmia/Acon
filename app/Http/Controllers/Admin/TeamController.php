@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TeamCreateRequest;
+use App\Http\Requests\TeamEditRequest;
 use App\Models\Designation;
 use App\Models\Team;
 use Illuminate\Http\Request;
@@ -28,19 +30,12 @@ class TeamController extends Controller
         ]);
     }
 
-    public function insert(Request $req)
+    public function insert(TeamCreateRequest $req)
     {
         $name = $req->name;
         $photo = $req->file('photo');
         $designation_id = $req->designation_id;
         $created_at = Carbon::now();
-
-
-        $req->validate([
-            'name' => 'required',
-            'photo' => 'required|file|image|mimes:jpeg,jpg,png',
-            'designation_id' => 'required',
-        ]);
 
         $all_socail_nullable_fild = ['facebook', 'twitter', 'linkedin', 'youtube', 'google_plus', 'instagram', 'flickr'];
 
@@ -92,7 +87,7 @@ class TeamController extends Controller
         ]);
     }
 
-    public function edit(Request $req)
+    public function edit(TeamEditRequest $req)
     {
         $id = $req->id;
         $name = $req->name;
@@ -100,10 +95,6 @@ class TeamController extends Controller
         $designation_id = $req->designation_id;
 
 
-        $req->validate([
-            'name' => 'required',
-            'designation_id' => 'required',
-        ]);
         if($photo){
             $req->validate([
                 'photo' => 'required|file|image|mimes:jpeg,jpg,png',

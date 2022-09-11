@@ -3,63 +3,64 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DesignationCreateRequest;
+use App\Http\Requests\DesignationEditRequest;
 use App\Models\Designation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+
 
 class DesignationController extends Controller
 {
 
     public function index()
     {
-        return view('admin.designation', [
+        return view('admin.designations.index', [
             'designations' => Designation::paginate(10),
         ]);
     }
 
-    // insert page
-    public function designation_add_page()
+
+    public function create()
     {
-        return view('admin.designation_add');
+        return view('admin.designations.create');
     }
 
-    // insert
-    public function insert(Request $req)
+
+    public function store(DesignationCreateRequest $request)
     {
-        $req->validate([
-            'designation_name' => 'required',
-        ]);
+         $inputs = $request->only('designation_name');
 
-        Designation::insert([
-            "designation_name" => $req->designation_name,
+        try{
+            Designation::create($inputs);
+            Session::flash('success', 'You are success to add your item');
+            return back()->with('success', 'Data is Added Successfull');
+        }catch (\Exception $exception){
+            Session::flash('error',$exception->getMessage());
+            return back();
+        }
 
-        ]);
-        return back()->with('success', 'Data is Added Successfull');
     }
 
-    // edit page
-    public function edit_page($id)
+
+    public function edit($id)
     {
-        return view('admin.designation_edit', [
+        return view('admin.designations.edit', [
             'designations' => Designation::find($id),
 
         ]);
     }
 
-    // edit
-    public function edit(Request $req)
+    public function update(DesignationEditRequest $req,$id)
     {
-        $req->validate([
-            'designation_name' => 'required',
-        ]);
-
-        Designation::find($req->id)->update([
+        Designation::find($id)->update([
             "designation_name" => $req->designation_name,
         ]);
         return back()->with('success', 'Data is Updated Successfull');
     }
 
-    // delete
-    public function delete($id)
+
+    public function destroy($id)
     {
         Designation::find($id)->forceDelete();
         return back()->with('success', 'Data is Deleted Successfull');

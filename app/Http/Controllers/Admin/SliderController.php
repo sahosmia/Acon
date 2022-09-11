@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SliderCreateRequest;
+use App\Http\Requests\SliderEditRequest;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 
@@ -11,11 +13,11 @@ use Image;
 
 class SliderController extends Controller
 {
-  
+
 
      public function index()
      {
-         return view('admin.slider', [
+         return view('admin.sliders.index', [
              'sliders' => Slider::paginate(10),
          ]);
      }
@@ -23,11 +25,11 @@ class SliderController extends Controller
      // insert page
      public function create()
      {
-         return view('admin.slider_add');
+         return view('admin.sliders.create');
      }
 
      // insert
-     public function insert(Request $req)
+     public function insert(SliderCreateRequest $req)
      {
          $photo = $req->file('photo');
          $heading = $req->heading;
@@ -38,15 +40,7 @@ class SliderController extends Controller
          $button2_url = $req->button2_url;
          $created_at = Carbon::now();
 
-         $req->validate([
-             'photo' => 'required|file|image|mimes:jpeg,jpg,png',
-             'heading' => 'required',
-             'content' => 'required',
-             'button1_text' => 'required',
-             'button1_url' => 'required|url',
-             'button2_text' => 'required',
-             'button2_url' => 'required|url',
-         ]);
+
 
          $id = Slider::insertGetId([
              "heading" => $heading,
@@ -75,13 +69,13 @@ class SliderController extends Controller
      // edit page
      public function edit_page($id)
      {
-         return view('admin.slider_edit', [
+         return view('admin.sliders.edit', [
              'slider' => Slider::find($id),
          ]);
      }
 
      // edit
-     public function edit(Request $req)
+     public function edit(SliderEditRequest $req)
      {
          $id = $req->id;
          $photo = $req->file('photo');
@@ -92,15 +86,6 @@ class SliderController extends Controller
          $button2_text = $req->button2_text;
          $button2_url = $req->button2_url;
 
-
-         $req->validate([
-            'heading' => 'required',
-             'content' => 'required',
-             'button1_text' => 'required',
-             'button1_url' => 'required|url',
-             'button2_text' => 'required',
-             'button2_url' => 'required|url',
-         ]);
          if($photo){
              $req->validate([
                  'photo' => 'required|file|image|mimes:jpeg,jpg,png',

@@ -24,7 +24,10 @@ class TestimonialEditRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'designation' => 'required',
+            'company' => 'required',
+            'comment' => 'required',
         ];
     }
 }

@@ -30,7 +30,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home', [
+        return view('admin.home', [
             'slider_count' => Slider::count(),
             'testimonial_count' => Testimonial::count(),
             'portfolio_count' => Portfolio::count(),

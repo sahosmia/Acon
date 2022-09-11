@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PortfolioCreateRequest;
+use App\Http\Requests\PortfolioEditRequest;
 use App\Models\Portfolio;
 use App\Models\Portfolio_category;
 use App\Models\Portfolio_photo;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Image;
 
@@ -15,21 +16,21 @@ class PortfolioController extends Controller
 
    public function index()
    {
-       return view('admin.portfolio', [
+       return view('admin.portfolios.index', [
            'portfolios' => Portfolio::with("protfolioCategory:id,name")->paginate(10),
        ]);
    }
 
    // insert page
-   public function portfolio_add()
+   public function create()
    {
-       return view('admin.portfolio_add',[
+       return view('admin.portfolios.create',[
            'categorys' => Portfolio_category::all()
        ]);
    }
 
    // insert
-   public function insert(Request $req)
+   public function store(PortfolioCreateRequest $req)
    {
         $name = $req->name;
         $slug = $slug = strtolower(str_replace(" ","-",$req->name));
@@ -48,26 +49,6 @@ class PortfolioController extends Controller
         $photo = $req->file('photo');
         $photos =$req->file('photos');
         $created_at = Carbon::now();
-
-
-        $req->validate([
-            'name' => 'required',
-            'short_content' => 'required',
-            'content' => 'required',
-            'client_name' => 'required',
-            'client_company' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'website' => 'required|url',
-            'cost' => 'required',
-            'client_comment' => 'required',
-            'category_id' => 'required',
-            'meta_title' => 'required',
-            'meta_description' => 'required',
-            'photo' => 'required|file|image|mimes:jpeg,jpg,png',
-            'banner' => 'required|file|image|mimes:jpeg,jpg,png',
-        ]);
-
 
 
         $count = Portfolio::where('slug', $slug)->count();
@@ -99,7 +80,7 @@ class PortfolioController extends Controller
         $photo_name = "protfolio_" .$id ."." . $photo_extention;
         Image::make($photo)->save(base_path('public/uploads/portfolio/' . $photo_name));
 
-            //  banner
+        //  banner
         $protfolio_photo = $req->file('banner');
         $protfolio_photo_extention = $protfolio_photo->getClientOriginalExtension();
         $protfolio_photo_name = "protfolio_banner_" .$id ."." . $protfolio_photo_extention;
@@ -132,18 +113,17 @@ class PortfolioController extends Controller
 
 
    // edit page
-   public function edit_page($id)
+   public function edit($id)
    {
-       return view('admin.portfolio_edit', [
+       return view('admin.portfolios.edit', [
            'portfolio' => Portfolio::find($id),
            'categorys' => Portfolio_category::all(),
        ]);
    }
 
    // edit
-   public function edit(Request $req)
+   public function update(PortfolioEditRequest $req, $id)
    {
-       $id = $req->id;
        $name = $req->name;
        $short_content = $req->short_content;
        $content = $req->content;
@@ -161,27 +141,6 @@ class PortfolioController extends Controller
        $banner = $req->file('banner');
        $photos = $req->file('photos');
        $created_at = Carbon::now();
-
-
-
-       $req->validate([
-           'name' => 'required',
-           'short_content' => 'required',
-           'content' => 'required',
-           'client_name' => 'required',
-           'client_company' => 'required',
-           'start_date' => 'required',
-           'end_date' => 'required',
-           'website' => 'required|url',
-           'cost' => 'required',
-           'client_comment' => 'required',
-           'category_id' => 'required',
-           'meta_title' => 'required',
-           'meta_description' => 'required',
-       ]);
-
-
-
 
        if($photo){
            $req->validate([
@@ -273,7 +232,7 @@ class PortfolioController extends Controller
    }
 
    // p_delete single
-   public function delete($id)
+   public function destory($id)
    {
        foreach(Portfolio_photo::where('portfolio_id', $id )->get() as $item){
         unlink('uploads/portfolio_photos/' . $item->photo);

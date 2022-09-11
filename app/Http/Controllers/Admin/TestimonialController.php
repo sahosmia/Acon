@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TestimonialCreateRequest;
+use App\Http\Requests\TestimonialEditRequest;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -68,7 +69,7 @@ class TestimonialController extends Controller
         ]);
     }
 
-    public function update(Request $req, $id)
+    public function update(TestimonialEditRequest $req, $id)
     {
         $name = $req->name;
         $designation = $req->designation;
@@ -76,12 +77,7 @@ class TestimonialController extends Controller
         $comment = $req->comment;
         $photo = $req->file('photo');
 
-        $req->validate([
-            'name' => 'required',
-            'designation' => 'required',
-            'company' => 'required',
-            'comment' => 'required',
-        ]);
+
         if($photo){
             $req->validate([
                 'photo' => 'required|file|image|mimes:jpeg,jpg,png',

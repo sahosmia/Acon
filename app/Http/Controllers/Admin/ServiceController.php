@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ServiceCreateRequest;
+use App\Http\Requests\ServiceEditRequest;
 use App\Models\Service;
-use Illuminate\Http\Request;
 
 use Illuminate\Support\Str;
 
@@ -16,7 +17,7 @@ class ServiceController extends Controller
 
     public function index()
     {
-        return view('admin.service', [
+        return view('admin.services.index', [
             'services' => Service::paginate(10),
         ]);
     }
@@ -24,11 +25,11 @@ class ServiceController extends Controller
     // insert page
     public function service_add()
     {
-        return view('admin.service_add');
+        return view('admin.services.create');
     }
 
     // insert
-    public function insert(Request $req)
+    public function insert(ServiceCreateRequest $req)
     {
         $heading = $req->heading;
         $slug = strtolower(str_replace(" ","-",$req->heading));
@@ -37,19 +38,6 @@ class ServiceController extends Controller
         $meta_title = $req->meta_title;
         $meta_description = $req->meta_description;
         $created_at = Carbon::now();
-
-
-        $req->validate([
-            'photo' => 'required|file|image|mimes:jpeg,jpg,png',
-            'banner' => 'required|file|image|mimes:jpeg,jpg,png',
-            'heading' => 'required',
-            'short_content' => 'required',
-            'content' => 'required',
-            'meta_title' => 'required',
-            'meta_description' => 'required',
-        ]);
-
-
 
         $count = Service::where('slug', $slug)->count();
 
@@ -89,13 +77,13 @@ class ServiceController extends Controller
     // edit page
     public function edit_page($id)
     {
-        return view('admin.service_edit', [
+        return view('admin.services.edit', [
             'service' => Service::find($id),
         ]);
     }
 
     // edit
-    public function edit(Request $req)
+    public function edit(ServiceEditRequest $req)
     {
         $id = $req->id;
         $heading = $req->heading;
@@ -106,13 +94,7 @@ class ServiceController extends Controller
         $photo = $req->file('photo');
         $service_photo = $req->file('banner');
 
-        $req->validate([
-            'heading' => 'required',
-            'short_content' => 'required',
-            'content' => 'required',
-            'meta_title' => 'required',
-            'meta_description' => 'required',
-        ]);
+
         if($photo){
             $req->validate([
                 'photo' => 'required|file|image|mimes:jpeg,jpg,png',

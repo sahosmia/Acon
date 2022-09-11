@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\NewsCreateRequest;
+use App\Http\Requests\NewsEditRequest;
 use App\Models\News;
 use App\Models\News_category;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Image;
 use Illuminate\Support\Str;
 
@@ -16,7 +16,7 @@ class NewsController extends Controller
 
   public function index()
   {
-      return view('admin.news', [
+      return view('admin.news.index', [
           'newss' => News::paginate(10),
       ]);
   }
@@ -24,13 +24,13 @@ class NewsController extends Controller
   // insert page
   public function news_add()
   {
-        return view('admin.news_add',[
+        return view('admin.news.create',[
             'categorys' => News_category::all()
         ]);
   }
 
   // insert
-  public function insert(Request $request){
+  public function insert(NewsCreateRequest $request){
         $title = $request->title;
         $short_content = $request->short_content;
         $content = $request->content;
@@ -40,17 +40,6 @@ class NewsController extends Controller
         $meta_description = $request->meta_description;
         $created_at = Carbon::now();
 
-        $request->validate([
-            'title' => 'required',
-            'short_content' => 'required',
-            'content' => 'required',
-            'comment' => 'required',
-            'category_id' => 'required',
-            'meta_title' => 'required',
-            'meta_description' => 'required',
-            'photo' => 'required|file|image|mimes:jpeg,jpg,png',
-            'banner' => 'required|file|image|mimes:jpeg,jpg,png',
-        ]);
 
         $slug = strtolower(str_replace(" ","-",$request->title));
         $count = News::where('slug', $slug)->count();
@@ -93,14 +82,14 @@ class NewsController extends Controller
   // edit page
   public function edit_page($id)
   {
-      return view('admin.news_edit', [
+      return view('admin.news.edit', [
           'news' => News::find($id),
           'category' => News_category::all(),
       ]);
   }
 
   // edit
-  public function edit(Request $req)
+  public function edit(NewsEditRequest $req)
   {
       $id = $req->id;
       $title = $req->title;
@@ -112,21 +101,6 @@ class NewsController extends Controller
       $meta_description = $req->meta_description;
       $photo = $req->file('photo');
       $banner = $req->file('banner');
-
-      $req->validate([
-          'title' => 'required',
-          'short_content' => 'required',
-          'content' => 'required',
-          'comment' => 'required',
-          'category_id' => 'required',
-          'meta_title' => 'required',
-          'meta_description' => 'required',
-      ]);
-
-
-
-
-
 
       if($photo){
           $req->validate([
